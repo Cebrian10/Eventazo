@@ -31,7 +31,14 @@ pnpm start
 ```
 
 ### Tecnologías utilizadas
-- [Google](https://google.com): Definición de google
+- [Angular](https://angular.io/): Framework de desarrollo de aplicaciones web de una sola página (SPA) mantenido por Google.
+- [Express.js](https://expressjs.com/): Framework web para Node.js, utilizado para la creación de servidores web y APIs.
+- [PrimeNG](https://www.primefaces.org/primeng/): Colección de componentes de interfaz de usuario para Angular.
+- [RxJS](https://rxjs.dev/): Biblioteca para programación reactiva en JavaScript.
+- [PrimeIcons](https://www.primefaces.org/primeicons/): Librería de iconos utilizada en conjunción con PrimeNG.
+- [TypeScript](https://www.typescriptlang.org/): Superset de JavaScript que agrega tipado estático opcional y otras características modernas al lenguaje.
+- [Zone.js](https://github.com/angular/zone.js/): Biblioteca para interceptar y rastrear operaciones asíncronas en JavaScript.
+
 
 ## Backend
 ### Para entrar a la carpeta desde la raíz, utilizar el siguiente comando:
@@ -50,7 +57,11 @@ pnpm start
 ```
 
 ### Tecnologías Utilizadas:
-- [Google](https://google.com): Definición de google
+- [Express.js](https://expressjs.com/): Framework web para Node.js, utilizado para la creación de servidores web y APIs. Versión utilizada: ^4.19.2.
+- [Cors](https://www.npmjs.com/package/cors): Middleware de Express.js que proporciona un middleware Connect/Express para habilitar el CORS (Cross-Origin Resource Sharing) con varias opciones. Versión utilizada: ^2.8.5.
+- [Multer](https://www.npmjs.com/package/multer): Middleware de Express.js para manejar datos de formularios multipart/form-data, comúnmente utilizado para el manejo de archivos en las solicitudes HTTP. Versión utilizada: 1.4.5-lts.1.
+- [MySQL2](https://www.npmjs.com/package/mysql2): Cliente MySQL para Node.js que proporciona una API de bajo nivel para interactuar con bases de datos MySQL/MariaDB. Versión utilizada: ^3.9.7.
 
 
-###### Hecho por: Ameth Cebrian, Norman Sparks y Eric Martínez
+
+###### ©Ameth Cebrian, Norman Sparks y Eric Martínez
