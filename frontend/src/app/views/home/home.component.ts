@@ -8,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+    
+  constructor() { }
 
+  // Función para cambiar el tema
+  // changeTheme(theme: string) {
+  //   console.log('Cambiando tema...');
+  //   let themeLink = document.getElementById('theme-link') as HTMLLinkElement;
+
+  //   if(themeLink){
+  //     themeLink.href = theme + '.css';
+  //   }
+  // }
 }
