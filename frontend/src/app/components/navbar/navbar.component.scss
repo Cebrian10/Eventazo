@@ -1,3 +1,17 @@
-.fa-icon {
-    margin-right: 10px;
+img {
+    width: auto;
+    height: 50px;    
+}
+
+nav div ul {
+    margin-right: auto;
+}
+
+nav div ul li {
+    margin: 0;
+    cursor: pointer;
+}
+
+nav div ul li:hover {
+    background-color: #F1F5F9;    
 }
