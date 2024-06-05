@@ -1,40 +1,9 @@
 img {
     width: auto;
     height: 50px;
+    padding-right: 8px;
 }
 
-// .ng-fa-icon {
-//     color: #334155;
-//     font-size: 1.25rem;;
-// }
-
-// nav {
-//     div ul {
-//         margin-right: auto;
-
-//         li {
-//             margin: 0;
-//             cursor: pointer;
-
-//             &:hover {
-//                 background-color: #F1F5F9;
-//                 border-radius: 5px;
-
-//                 .ng-fa-icon,
-//                 .item-label {
-//                     color: #252525;
-//                 }
-//             }
-
-//             &.active {
-//                 background-color: #F1F5F9;
-//                 border-radius: 5px;
-
-//                 .ng-fa-icon,
-//                 .item-label {
-//                     color: #252525;
-//                 }
-//             }
-//         }
-//     }
-// }
+.fa-icon {
+    margin-right: 6px;
+}
