@@ -1,4 +1,4 @@
-<div class="flex flex-wrap">
+<!-- <div class="flex flex-wrap">
     <section class="relative mx-auto">
         <nav class="flex justify-between bg-white text-black w-screen shadow-md">
 
@@ -9,18 +9,54 @@
 
                 <ul class="md:flex px-4 font-heading space-x-6">
                     @for (item of userRegular; track item) {
-                    <li (click)="item.command ? item.command() : null" class="px-2 xl:px-2 py-2">
+                    <li (click)="item.command ? item.command() : null; currentPage = item.page"
+                        [ngClass]="{ 'active': currentPage === item.page }" class="flex items-center px-2 xl:px-2 py-2">
                         <fa-icon *ngIf="item.icon" [icon]="getIcon(item.icon)" class="fa-icon mr-2"></fa-icon>
-                        <a class="text-slate-600">{{ item.label }}</a>
+                        <a class="text-slate-600 item-label">{{ item.label }}</a>
                     </li>
                     }
                 </ul>
 
                 <div class="items-center space-x-5 items-center">
-                    <fa-icon class="fa-icon mr-2 text-lg" [icon]="getIcon('faCircleUser')"></fa-icon>
+                    
+
+                    <button (click)="toggleMenu()" class="">
+                        <fa-icon class="fa-icon mr-2 text-lg" [icon]="getIcon('faCircleUser')"></fa-icon>
+                      </button>
+                    
+                      
+                      <div *ngIf="showMenu" class="absolute bg-white shadow-lg rounded mt-2 py-2 w-48 z-10 right-0">
+                      
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 1</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 2</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Opción 3</a>
+                      </div>
                 </div>
             </div>
 
         </nav>
     </section>
+</div> -->
+
+<div class="card">
+    <p-menubar [model]="userRegular">
+        <ng-template pTemplate="start">
+            <img src="../assets/logoticket.png" alt="logoticket">
+        </ng-template>
+        <ng-template pTemplate="item" let-item let-root="root">
+            <a pRipple class="flex align-items-center p-menuitem-link">
+                <fa-icon *ngIf="item.icon" [icon]="getIcon(item.icon)" class="fa-icon mr-2"></fa-icon>
+                <span class="ml-2">{{ item.label }}</span>
+                <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
+                <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
+                <i *ngIf="item.items" [ngClass]="['pi', root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto']"></i>
+            </a>
+        </ng-template>
+        <ng-template pTemplate="end">
+            <div class="flex align-items-center gap-2">
+                <input type="text" pInputText placeholder="Search" class="w-8rem sm:w-auto" />
+                <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+            </div>
+        </ng-template>
+    </p-menubar>
 </div>
