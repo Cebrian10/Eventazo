@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
-
+import { MenuModule } from 'primeng/menu';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { Router } from '@angular/router';
-
+import { ButtonModule } from 'primeng/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faHome, faPencilAlt, faPhone,
@@ -20,19 +20,19 @@ import {
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [MenubarModule, AvatarModule, InputTextModule, RippleModule, CommonModule, FontAwesomeModule]
+  imports: [MenubarModule, AvatarModule, InputTextModule, RippleModule, CommonModule, FontAwesomeModule, MenuModule, ButtonModule]
 })
 
 export class NavbarComponent implements OnInit {
   userRegular: MenuItem[] | undefined;
+  userPromoter: MenuItem[] | undefined;
+  opcUsers: MenuItem[] | undefined;
 
   faHome = faHome;
   faNewspaper = faNewspaper;
   faPhone = faPhone;
   faCircleQuestion = faCircleQuestion;
-
   faPencilAlt = faPencilAlt;
-
   faComments = faComments;
   faCircleUser = faCircleUser;
   faSpinner = faSpinner;
@@ -46,6 +46,12 @@ export class NavbarComponent implements OnInit {
       { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone', page: 'contact' },
       { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion', page: 'faq' },
     ];
+
+    this.opcUsers = [
+      { label: 'Iniciar sesión', command: () => this.goToPage('login') },
+      { label: 'Registrarse', command: () => this.goToPage('register') }
+    ]
+
   }
 
   goToPage(page: string) {

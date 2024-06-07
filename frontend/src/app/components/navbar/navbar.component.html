@@ -12,8 +12,9 @@
 
     <ng-template pTemplate="end">
         <div class="flex align-items-center gap-2">
-            <input type="text" pInputText placeholder="Search" />
-            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+            <input type="text" pInputText placeholder="Buscar evento..." />
+            <p-menu #menu [model]="opcUsers" [popup]="true" />
+            <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>                
         </div>
     </ng-template>
 </p-menubar>
