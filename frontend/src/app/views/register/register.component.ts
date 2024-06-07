@@ -17,22 +17,32 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
+
 export class RegisterComponent {
 
   private readonly apiService = inject(ApiService);
   private readonly authService = inject(AuthService);
 
+  name: string = "";
+  lastname: string = "";
   email: string = "";
   password: string = "";
+  id_roluser: string = "";
 
   constructor() { }
 
   async onSubmit() {
-    if (this.email != "" && this.password != "") {
+    if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_roluser != "") {
 
-      const hashedPassword = await this.authService.hashPassword(this.password);
+      // const hashedPassword = await this.authService.hashPassword(this.password);
 
-      const formData = { email: this.email, contrasena: hashedPassword };
+      const formData = {
+        Nombre: this.name,
+        Apellido: this.lastname,
+        Correo: this.email,
+        Contrasena: await this.authService.hashPassword(this.password),
+        ID_RolUsuario: this.id_roluser
+      };
 
       this.apiService.postRegister('registro', formData)
         .pipe(

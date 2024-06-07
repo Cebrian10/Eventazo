@@ -1,18 +1,9 @@
-import usuarioModel from '../models/usuarioModel.js';
-import * as bd from '../database/storage.js';
-
-function setUsuario(req, res) {
-  res.status(201).json({ message: 'Usuario setUsuario' });
-}
-
-function getUsuario(req, res) {
-  res.status(201).json({ message: 'Usuario getUsuario' });
-}
+import * as usuarioModel from '../models/usuarioModel.js';
 
 async function getAllUsuario(req, res) {
   try {
-    const result = await bd.obtenerUsuarios();
-    res.status(201).json({ message: 'Usuario getAllUsuario', result: result });
+    const result = await usuarioModel.obtenerTodosLosUsuarios();
+    res.status(201).json({ result: result });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error getAllUsuario' + error.message });
@@ -21,7 +12,7 @@ async function getAllUsuario(req, res) {
 
 async function createUsuario(req, res) {
   try {
-    const result = await bd.obtenerUsuarios();
+    const result = await usuarioModel.crearUsuario(req);
     res.status(201).json({ message: 'Usuario createUsuario', result: result });
   } catch (error) {
     console.error(error);
@@ -29,19 +20,7 @@ async function createUsuario(req, res) {
   }
 }
 
-function updateUsuario(req, res) {
-  res.status(201).json({ message: 'Usuario updateUsuario' });
-}
-
-function deleteUsuario(req, res) {
-  res.status(201).json({ message: 'Usuario deleteUsuario' });
-}
-
 export {
-  setUsuario,
-  getUsuario,
   getAllUsuario,
-  createUsuario,
-  updateUsuario,
-  deleteUsuario
+  createUsuario    
 };

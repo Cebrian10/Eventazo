@@ -3,6 +3,16 @@
     <form (submit)="onSubmit()" method="post">
   
       <p-floatLabel>
+        <input pInputText id="name" name="name" [(ngModel)]="name"/>
+        <label for="name">Nombre</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input pInputText id="lastname" name="lastname" [(ngModel)]="lastname"/>
+        <label for="lastname">Apellido</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
         <input pInputText id="email" name="email" [(ngModel)]="email"/>
         <label for="email">Correo electrónico</label>
       </p-floatLabel>
