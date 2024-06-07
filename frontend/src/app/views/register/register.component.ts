@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -10,10 +11,15 @@ import { tap, catchError } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
+interface RolUsuario {
+  name: string;
+  value: number;
+}
+
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule],
+  imports: [FormsModule, InputTextModule, DropdownModule, FloatLabelModule, PasswordModule, ButtonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -27,28 +33,38 @@ export class RegisterComponent {
   lastname: string = "";
   email: string = "";
   password: string = "";
-  id_roluser: string = "";
+
+  roles: RolUsuario[] | undefined;
+  selectedRol: RolUsuario | undefined;
 
   constructor() { }
 
-  async onSubmit() {
-    if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_roluser != "") {
+  ngOnInit() {
+    this.roles = [
+      { name: 'Regular', value: 2 },
+      { name: 'Promotor', value: 3 }
+    ];
+  }
 
-      // const hashedPassword = await this.authService.hashPassword(this.password);
+  async onSubmit() {
+    if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.selectedRol?.value != undefined) {
 
       const formData = {
         Nombre: this.name,
         Apellido: this.lastname,
         Correo: this.email,
         Contrasena: await this.authService.hashPassword(this.password),
-        ID_RolUsuario: this.id_roluser
+        ID_RolUsuario: this.selectedRol.value
       };
 
-      this.apiService.postRegister('registro', formData)
+      this.apiService.postRegister('usuario', formData)
         .pipe(
           tap(response => {
-            if (response.codigo == 200) {
+            if (response.status == 201) {
               console.log('Registro exitoso:', response);
+            }
+            else {
+              console.error('Error al enviar los datos:', response);
             }
           }),
           catchError(error => {

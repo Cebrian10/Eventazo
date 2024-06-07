@@ -6,17 +6,17 @@ async function getAllUsuario(req, res) {
     res.status(201).json({ result: result });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error getAllUsuario' + error.message });
+    res.status(500).json({ error: 'Error getAllUsuario: ' + error.message });
   }
 }
 
 async function createUsuario(req, res) {
-  try {
+  try {    
     const result = await usuarioModel.crearUsuario(req);
     res.status(201).json({ message: 'Usuario createUsuario', result: result });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error createUsuario' });
+    res.status(500).json({ error: 'Error createUsuario: ' + error.message });
   }
 }
 

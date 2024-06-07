@@ -6,19 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:4000';
+  private apiUrl = 'http://localhost:4000/api';
 
   constructor(private http: HttpClient) { }
 
   postRegister(endpoint: string, formData: any): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
-    console.log(url, formData);
+    const url = `${this.apiUrl}/${endpoint}`;    
     return this.http.post<any>(url, formData);
   }
 
   postLogin(endpoint: string, formData: any): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;
-    console.log(url, formData);
-    return this.http.post<any>('','');//(url, formData);
+    const url = `${this.apiUrl}/${endpoint}`;    
+    return this.http.post<any>(url, formData);
   }
 }

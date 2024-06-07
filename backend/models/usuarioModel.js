@@ -3,8 +3,8 @@ import { pool } from '../database/connection.js'
 // GET getAllUsuario
 export async function obtenerTodosLosUsuarios() {
   try {
-    const [result] = await pool.query('SELECT * FROM usuario');
-    return result;
+    const [result] = await pool.query('CALL obtenerTodosLosUsuarios()');
+    return result[0];
   } catch (error) {
     console.error('Error fetching obtenerTodosLosUsuarios:', error);
     throw error;
@@ -16,11 +16,10 @@ export async function obtenerTodosLosUsuarios() {
 
 // POST createUsuario
 export async function crearUsuario(req) {
-  try {
-    const [result] = await pool.query(
-      `INSERT INTO usuario (Nombre, Apellido, Correo, Contrasena, ID_RolUsuario) 
-              VALUES (?, ?, ?, ?, ?)`, [req.Nombre, req.Apellido, req.Correo, req.Contrasena, req.ID_RolUsuario]
-    );
+  try {    
+    const [result] = await pool.query('CALL CrearUsuario(?, ?, ?, ?, ?)', [
+      req.body.Nombre, req.body.Apellido, req.body.Correo, req.body.Contrasena, req.body.ID_RolUsuario
+    ]);
     return result.affectedRows > 0;
   } catch (error) {
     console.error('Error fetching crearUsuario:', error);
@@ -30,12 +29,3 @@ export async function crearUsuario(req) {
     await pool.end();
   }
 }
-
-// (async () => {
-//   try {
-//       const users = await obtenerTodosLosUsuarios();
-//       console.log(users);
-//   } catch (error) {
-//       console.error('Error:', error);
-//   }
-// })();
