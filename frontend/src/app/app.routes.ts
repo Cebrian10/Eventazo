@@ -4,6 +4,7 @@ import { NewsComponent } from './views/news/news.component';
 import { ContactComponent } from './views/contact/contact.component';
 import { FaqComponent } from './views/faq/faq.component';
 import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FaqComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

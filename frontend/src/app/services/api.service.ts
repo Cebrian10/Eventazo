@@ -13,7 +13,7 @@ export class ApiService {
   postRegister(endpoint: string, formData: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     console.log(url, formData);
-    return this.http.post<any>('','');//(url, formData);
+    return this.http.post<any>(url, formData);
   }
 
   postLogin(endpoint: string, formData: any): Observable<any> {

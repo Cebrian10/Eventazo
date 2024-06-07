@@ -32,16 +32,13 @@ export class RegisterComponent {
 
       const hashedPassword = await this.authService.hashPassword(this.password);
 
-      const formData = {
-        email: this.email,
-        contrasena: hashedPassword
-      };
+      const formData = { email: this.email, contrasena: hashedPassword };
 
-      this.apiService.postRegister('register', formData)
+      this.apiService.postRegister('registro', formData)
         .pipe(
           tap(response => {
             if (response.codigo == 200) {
-              console.log('Registro exitoso:', response);      
+              console.log('Registro exitoso:', response);
             }
           }),
           catchError(error => {

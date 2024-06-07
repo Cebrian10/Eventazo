@@ -9,8 +9,14 @@ function getUsuario(req, res) {
   res.status(201).json({ message: 'Usuario getUsuario' });
 }
 
-function getAllUsuario(req, res) {
-  res.status(201).json({ message: 'Usuario getAllUsuario' });
+async function getAllUsuario(req, res) {
+  try {
+    const result = await bd.obtenerUsuarios();
+    res.status(201).json({ message: 'Usuario getAllUsuario', result: result });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error getAllUsuario' + error.message });
+  }
 }
 
 async function createUsuario(req, res) {
