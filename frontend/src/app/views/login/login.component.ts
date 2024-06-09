@@ -37,11 +37,12 @@ export class LoginComponent {
         contrasena: hashedPassword
       };
 
-      this.apiService.postLogin('login', formData)
+      this.apiService.postLogin('usuario/login', formData)
         .pipe(
           tap(response => {
             if (response.codigo == 200) {
               console.log('Login exitoso:', response);
+
             }
           }),
           catchError(error => {

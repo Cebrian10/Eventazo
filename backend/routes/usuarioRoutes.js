@@ -9,7 +9,7 @@ router.route('/')
     // .put(usuarioController.updateUsuario)
     // .delete(usuarioController.deleteUsuario)
 
-// router.route('/:id')
-//     .get(usuarioController.getUsuario)
+router.route('/login')
+    .post(usuarioController.getUsuario)
 
 export default router;

@@ -17,7 +17,7 @@ export async function obtenerUsuarioPorCorreo(req) {
     const [result] = await pool.query('CALL obtenerUsuarioPorCorreo(?)', [
       req.body.Correo
     ]);
-    return result[0].length > 0;
+    return result[0];
   }catch (error) {
     console.error('Error fetching obtenerUsuarioPorCorreo:', error);
     throw error;
