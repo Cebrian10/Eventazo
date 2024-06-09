@@ -60,11 +60,16 @@ export class RegisterComponent {
       this.apiService.postRegister('usuario', formData)
         .pipe(
           tap(response => {
-            if (response.status == 201) {
+            if (response.status === 201) {
               console.log('Registro exitoso:', response);
+
+            } else if (response.status === 409) {
+              console.log('El correo ya está registrado:', response);
+
             }
-            else {
+            else if (response.status === 500) {
               console.error('Error al enviar los datos:', response);
+
             }
           }),
           catchError(error => {

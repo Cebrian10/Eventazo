@@ -11,9 +11,14 @@ async function getAllUsuario(req, res) {
 }
 
 async function createUsuario(req, res) {
-  try {    
-    const result = await usuarioModel.crearUsuario(req);
-    res.status(201).json({ message: 'Usuario createUsuario', result: result });
+  try {
+    const existUser = await usuarioModel.obtenerUsuarioPorCorreo(req);
+    if (existUser) {
+      return res.status(409).json({ error: 'Correo ya registrado' });
+    } else {
+      const result = await usuarioModel.crearUsuario(req);
+      res.status(201).json({ message: 'Usuario createUsuario', result: result });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error createUsuario: ' + error.message });
@@ -22,5 +27,5 @@ async function createUsuario(req, res) {
 
 export {
   getAllUsuario,
-  createUsuario    
+  createUsuario
 };
