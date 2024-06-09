@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,6 +10,7 @@ import { tap, catchError } from 'rxjs';
 
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +21,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
 
+  private readonly router = inject(Router);
   private readonly apiService = inject(ApiService);
   private readonly authService = inject(AuthService);
+  private readonly sessionService = inject(SessionService);
 
   email: string = "";
   password: string = "";
@@ -30,20 +34,35 @@ export class LoginComponent {
   async onSubmit() {
     if (this.email != "" && this.password != "") {
 
-      const hashedPassword = await this.authService.hashPassword(this.password);
-
       const formData = {
-        email: this.email,
-        contrasena: hashedPassword
+        Correo: this.email
       };
 
       this.apiService.postLogin('usuario/login', formData)
         .pipe(
-          tap(response => {
-            if (response.codigo == 200) {
-              console.log('Login exitoso:', response);
+          tap(async response => {
+            switch (response.status) {
+
+              case 201:
+                const result = await this.authService.verifyPassword(this.password, response.result[0].Contrasena);
+
+                if (result) {
+                  // this.sessionService.setSessionToken(response.result[0]);
+                  
+                  // this.router.navigate(['/home']);
+
+                } else {
+                  console.log('Credenciales incorrectas...');
+                }
+
+                break;
+
+              case 404:
+                console.log('Registro fallido:', response);
+                break;
 
             }
+
           }),
           catchError(error => {
             console.error('Error al enviar los datos:', error);
@@ -52,7 +71,7 @@ export class LoginComponent {
         ).subscribe();
 
     } else {
-      console.log("Email and password are required.");
+      console.log("No se aceptan campos vacios...");
     }
   }
 

@@ -1,4 +1,8 @@
-<p-menubar [model]="userRegular">
+<p-menubar [model]="userRol === 0 ? userNotRegister : 
+                    userRol === 1 ? userAdmin : 
+                    userRol === 2 ? userPromoter : 
+                    userRol === 3 ? userRegular : userNotRegister">
+                    
     <ng-template pTemplate="start">
         <img src="../assets/logoticket.png" alt="logoticket">
     </ng-template>
@@ -14,7 +18,7 @@
         <div class="flex align-items-center gap-2">
             <input type="text" pInputText placeholder="Buscar evento..." />
             <p-menu #menu [model]="opcUsers" [popup]="true" />
-            <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>                
+            <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>
         </div>
     </ng-template>
 </p-menubar>

@@ -8,19 +8,23 @@ export class SessionService {
 
   constructor(private cookieService: CookieService) { }
 
-  setSessionToken(token: string): void {
-    this.cookieService.set('sessionToken', token, { 
-      expires: 1, 
-      sameSite: 'Strict' 
-    });
+  setSessionToken(formData: any): | void {
+    this.cookieService.set('loggedToken', 'true');
+    this.cookieService.set('idUserToken', formData.ID);
+    this.cookieService.set('nameUserToken', formData.Nombre + ' ' + formData.Apellido);
+    this.cookieService.set('idRolToken', formData.ID_RolUsuario);
   }
 
-  getSessionToken(): string {
-    return this.cookieService.get('sessionToken');
-  }
+  getLoggedToken = (): string => this.cookieService.get('loggedToken');
+  getIdUserToken = (): string => this.cookieService.get('idUserToken');
+  getNameUserToken = (): string => this.cookieService.get('nameUserToken');
+  getIdRolToken = (): string => this.cookieService.get('idRolToken');
 
   clearSession(): void {
-    this.cookieService.delete('sessionToken');
+    this.cookieService.delete('loggedToken');
+    this.cookieService.delete('idUserToken');
+    this.cookieService.delete('nameUserToken');
+    this.cookieService.delete('idRolToken');
   }
-  
+
 }
