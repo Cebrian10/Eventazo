@@ -1,20 +1,26 @@
-<p-menubar [model]="navUser()">
-    <ng-template pTemplate="start">
-        <img src="../assets/logoticket.png" alt="logoticket">
+<p-menubar [model]="navUser()" class="shadow">
+    <ng-template pTemplate="start" class=".z-0">
+        <div class="ng-start">
+            <img src="../assets/logoticket.png" alt="logoticket">
+        </div>
     </ng-template>
 
-    <ng-template let-item pTemplate="item">
-        <a (click)="item.command?.()" pRipple class="flex align-items-center p-menuitem-link">
-            <fa-icon *ngIf="item.icon" [icon]="getIcon(item.icon)" class="fa-icon mr-2"></fa-icon>
-            <span class="ml-2">{{ item.label }}</span>
-        </a>
+    <ng-template let-item pTemplate="item" class=".z-1">
+        <div class="ng-items">
+            <a (click)="item.command?.()" pRipple class="flex align-items-center p-menuitem-link">
+                <fa-icon *ngIf="item.icon" [icon]="getIcon(item.icon)" class="fa-icon mr-2"></fa-icon>
+                <span class="ml-2">{{ item.label }}</span>
+            </a>
+        </div>
     </ng-template>
 
     <ng-template pTemplate="end">
-        <div class="flex align-items-center gap-2">
-            <input type="text" pInputText placeholder="Buscar evento..." />
-            <p-menu #menu [model]="opcUser()" [popup]="true" />
-            <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>
+        <div class="ng-end">
+            <div class="flex align-items-center gap-2">
+                <input class="searchbar" type="text" pInputText placeholder="Buscar evento..." />
+                <p-menu #menu [model]="opcUser()" [popup]="true" />
+                <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>
+            </div>
         </div>
     </ng-template>
 </p-menubar>

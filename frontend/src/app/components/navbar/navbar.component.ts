@@ -93,8 +93,7 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Iniciar sesión', command: () => this.goToPage('login') },
-          { label: 'Registrarse', command: () => this.goToPage('register') },
+          { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { separator: true },
           { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
         ]);
@@ -110,9 +109,9 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Iniciar sesión', command: () => this.goToPage('login') },
-          { label: 'Registrarse', command: () => this.goToPage('register') },
+          { label: 'Cupones', command: () => this.goToPage('cupons') },
           { separator: true },
+          { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
         ]);
         break;
@@ -130,6 +129,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Iniciar sesión', command: () => this.goToPage('login') },
           { label: 'Registrarse', command: () => this.goToPage('register') },
           { separator: true },
+          { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
         ]);
         break;
