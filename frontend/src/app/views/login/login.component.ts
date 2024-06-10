@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
@@ -47,9 +47,8 @@ export class LoginComponent {
                 const result = await this.authService.verifyPassword(this.password, response.result[0].Contrasena);
 
                 if (result) {
-                  // this.sessionService.setSessionToken(response.result[0]);
-                  
-                  // this.router.navigate(['/home']);
+                  this.sessionService.setSessionToken(response.result[0]);
+                  this.router.navigate(['/home']);
 
                 } else {
                   console.log('Credenciales incorrectas...');

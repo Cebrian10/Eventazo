@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -6,13 +7,18 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SessionService {
 
-  constructor(private cookieService: CookieService) { }
+  private readonly cookieService = inject(CookieService);
+
+  private userRoleSubject = new BehaviorSubject<number>(0);
+  userRole$ = this.userRoleSubject.asObservable();
 
   setSessionToken(formData: any): | void {
     this.cookieService.set('loggedToken', 'true');
     this.cookieService.set('idUserToken', formData.ID);
     this.cookieService.set('nameUserToken', formData.Nombre + ' ' + formData.Apellido);
     this.cookieService.set('idRolToken', formData.ID_RolUsuario);
+
+    this.userRoleSubject.next(formData.ID_RolUsuario);
   }
 
   getLoggedToken = (): string => this.cookieService.get('loggedToken');
@@ -25,6 +31,8 @@ export class SessionService {
     this.cookieService.delete('idUserToken');
     this.cookieService.delete('nameUserToken');
     this.cookieService.delete('idRolToken');
+
+    this.userRoleSubject.next(0);
   }
 
 }
