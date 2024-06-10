@@ -3,24 +3,46 @@ import * as usuarioModel from '../models/usuarioModel.js';
 async function getAllUsuario(req, res) {
   try {
     const result = await usuarioModel.obtenerTodosLosUsuarios();
-    res.status(201).json({ result: result });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error getAllUsuario: ' + error.message });
-  }
+    res.json({ status: 201, result: result });
+
+  } catch (error) { res.json({ status: 500, message: 'Error getAllUsuario: ' + error.message }); }
 }
 
 async function createUsuario(req, res) {
-  try {    
-    const result = await usuarioModel.crearUsuario(req);
-    res.status(201).json({ message: 'Usuario createUsuario', result: result });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error createUsuario: ' + error.message });
-  }
+  try {
+    const existUser = await usuarioModel.obtenerUsuarioPorCorreo(req);
+
+    if (existUser.length > 0) {
+      return res.json({ status: 409, message: 'Correo ya registrado' });
+    } else {
+      const result = await usuarioModel.crearUsuario(req);
+      if (result) {
+        res.json({ status: 201, message: 'Usuario creado correctamente' });
+      } else {
+        res.json({ status: 404, message: 'Error al crear usuario' });
+      }
+      
+    }
+
+  } catch (error) { res.json({ status: 500, message: 'Error createUsuario: ' + error.message }); }
+}
+
+async function getUsuario(req, res) {
+  try {
+    const existUser = await usuarioModel.obtenerUsuarioPorCorreo(req);
+
+    if (existUser.length > 0) {
+      res.json({ status: 201, message: 'Usuario obtenido correctamente', result: existUser });
+    }
+    else {
+      res.json({ status: 404, message: 'Usuario no registrado' });
+    }
+
+  } catch (error) { res.json({ status: 500, message: 'Error getUsuario: ' + error.message }); }
 }
 
 export {
   getAllUsuario,
-  createUsuario    
+  createUsuario,
+  getUsuario
 };

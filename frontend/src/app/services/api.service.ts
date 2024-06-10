@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  postRegister(endpoint: string, formData: any): Observable<any> {
+  postUsuario(endpoint: string, formData: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;    
     return this.http.post<any>(url, formData);
   }

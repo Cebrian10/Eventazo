@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -6,21 +7,32 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SessionService {
 
-  constructor(private cookieService: CookieService) { }
+  private readonly cookieService = inject(CookieService);
 
-  setSessionToken(token: string): void {
-    this.cookieService.set('sessionToken', token, { 
-      expires: 1, 
-      sameSite: 'Strict' 
-    });
+  private userRoleSubject = new BehaviorSubject<number>(0);
+  userRole$ = this.userRoleSubject.asObservable();
+
+  setSessionToken(formData: any): | void {
+    this.cookieService.set('loggedToken', 'true');
+    this.cookieService.set('idUserToken', formData.ID);
+    this.cookieService.set('nameUserToken', formData.Nombre + ' ' + formData.Apellido);
+    this.cookieService.set('idRolToken', formData.ID_RolUsuario);
+
+    this.userRoleSubject.next(formData.ID_RolUsuario);
   }
 
-  getSessionToken(): string {
-    return this.cookieService.get('sessionToken');
-  }
+  getLoggedToken = (): string => this.cookieService.get('loggedToken');
+  getIdUserToken = (): string => this.cookieService.get('idUserToken');
+  getNameUserToken = (): string => this.cookieService.get('nameUserToken');
+  getIdRolToken = (): string => this.cookieService.get('idRolToken');
 
   clearSession(): void {
-    this.cookieService.delete('sessionToken');
+    this.cookieService.delete('loggedToken');
+    this.cookieService.delete('idUserToken');
+    this.cookieService.delete('nameUserToken');
+    this.cookieService.delete('idRolToken');
+
+    this.userRoleSubject.next(0);
   }
-  
+
 }

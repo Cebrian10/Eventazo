@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -57,24 +57,38 @@ export class RegisterComponent {
         ID_RolUsuario: this.selectedRol.value
       };
 
-      this.apiService.postRegister('usuario', formData)
+      this.apiService.postUsuario('usuario', formData)
         .pipe(
           tap(response => {
-            if (response.status == 201) {
-              console.log('Registro exitoso:', response);
+
+            switch (response.status) {
+              case 201:
+                console.log('Registro exitoso:', response);
+                break;
+
+              case 404:
+                console.log('Registro fallido:', response);
+                break;
+
+              case 409:
+                console.log('El correo ya está registrado:', response);
+                break;
+
+              case 500:
+                console.log('Error al enviar los datos:', response);
+                break;
+
             }
-            else {
-              console.error('Error al enviar los datos:', response);
-            }
+
           }),
           catchError(error => {
-            console.error('Error al enviar los datos:', error);
+            console.log('Error al enviar los datos:', error);
             throw error;
           })
         ).subscribe();
 
     } else {
-      console.log("Email and password are required.");
+      console.log("No se aceptan campos vacios...");
     }
   }
 

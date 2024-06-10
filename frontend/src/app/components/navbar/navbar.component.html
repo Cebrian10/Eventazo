@@ -1,4 +1,4 @@
-<p-menubar [model]="userRegular">
+<p-menubar [model]="navUser()">
     <ng-template pTemplate="start">
         <img src="../assets/logoticket.png" alt="logoticket">
     </ng-template>
@@ -13,8 +13,8 @@
     <ng-template pTemplate="end">
         <div class="flex align-items-center gap-2">
             <input type="text" pInputText placeholder="Buscar evento..." />
-            <p-menu #menu [model]="opcUsers" [popup]="true" />
-            <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>                
+            <p-menu #menu [model]="opcUser()" [popup]="true" />
+            <fa-icon [icon]="faCircleUser" class="fa-icon-user" (click)="menu.toggle($event)"></fa-icon>
         </div>
     </ng-template>
 </p-menubar>
