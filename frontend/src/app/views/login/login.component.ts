@@ -1,6 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
+import Swal from 'sweetalert2';
+
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -32,6 +34,18 @@ export class LoginComponent {
   constructor() { }
 
   async onSubmit() {
+    console.log('Iniciando sesion...');
+    // Swal.fire({
+    //   title: 'Cargando...',
+    //   text: 'Por favor espera',
+    //   allowOutsideClick: false,
+    //   allowEscapeKey: false,
+    //   showConfirmButton: false,
+    //   willOpen: () => {
+    //     Swal.showLoading();
+    //   }
+    // });
+
     if (this.email != "" && this.password != "") {
 
       const formData = {
@@ -41,8 +55,8 @@ export class LoginComponent {
       this.apiService.postLogin('usuario/login', formData)
         .pipe(
           tap(async response => {
-            switch (response.status) {
-
+            console.log(response);
+            switch (response.status) {              
               case 201:
                 const result = await this.authService.verifyPassword(this.password, response.result[0].Contrasena);
 
@@ -70,6 +84,23 @@ export class LoginComponent {
         ).subscribe();
 
     } else {
+      // Swal.fire({
+      //   position: "center",
+      //   icon: "info",
+      //   title: "No se aceptan campos vacios...",
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // });
+
+      Swal.fire({
+        position: 'center',
+        icon: "info",
+        title: "No se aceptan campos vacios...",
+        showConfirmButton: false,
+        timer: 1700,
+        allowOutsideClick: false,
+    });
+
       console.log("No se aceptan campos vacios...");
     }
   }

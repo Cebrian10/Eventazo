@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -26,6 +27,7 @@ interface RolUsuario {
 
 export class RegisterComponent {
 
+  private readonly router = inject(Router);
   private readonly apiService = inject(ApiService);
   private readonly authService = inject(AuthService);
 
@@ -64,6 +66,7 @@ export class RegisterComponent {
             switch (response.status) {
               case 201:
                 console.log('Registro exitoso:', response);
+                this.router.navigate(['/login']);
                 break;
 
               case 404:

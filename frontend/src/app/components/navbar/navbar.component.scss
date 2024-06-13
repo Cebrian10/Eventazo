@@ -11,5 +11,33 @@ img {
 .fa-icon-user {
     font-size: 1.5rem;
     cursor: pointer;
-    padding-left: 8px;
+    display: grid;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .ng-start {        
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%;
+    }
+
+    .ng-items {
+        z-index: 1000;
+    }
+
+    img {
+        height: 85%;
+        padding: 0;
+    }
+
+    .searchbar {
+        display: none;
+    }
 }

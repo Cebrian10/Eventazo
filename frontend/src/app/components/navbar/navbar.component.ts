@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
@@ -51,20 +51,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => {
-      this.userRol.set(roleId);
+      this.userRol.set(roleId)
       this.updateNavbar();
     });
-
-    // Inicializa el navbar con el rol actual
-    const roleId = parseInt(this.sessionService.getIdRolToken(), 10);
-    this.userRol.set(isNaN(roleId) ? 0 : roleId);
+    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
     this.updateNavbar();
-  }
-
-  ngOnDestroy() {
-    if (this.userRoleSubscription) {
-      this.userRoleSubscription.unsubscribe();
-    }
   }
 
   updateNavbar() {
@@ -93,8 +84,7 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Iniciar sesión', command: () => this.goToPage('login') },
-          { label: 'Registrarse', command: () => this.goToPage('register') },
+          { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { separator: true },
           { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
         ]);
@@ -110,9 +100,9 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Iniciar sesión', command: () => this.goToPage('login') },
-          { label: 'Registrarse', command: () => this.goToPage('register') },
+          { label: 'Cupones', command: () => this.goToPage('cupons') },
           { separator: true },
+          { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
         ]);
         break;
@@ -130,6 +120,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Iniciar sesión', command: () => this.goToPage('login') },
           { label: 'Registrarse', command: () => this.goToPage('register') },
           { separator: true },
+          { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
         ]);
         break;
