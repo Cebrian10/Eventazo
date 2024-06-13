@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
@@ -51,20 +51,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => {
-      this.userRol.set(roleId);
+      this.userRol.set(roleId)
       this.updateNavbar();
     });
-
-    // Inicializa el navbar con el rol actual
-    const roleId = parseInt(this.sessionService.getIdRolToken(), 10);
-    this.userRol.set(isNaN(roleId) ? 0 : roleId);
+    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
     this.updateNavbar();
-  }
-
-  ngOnDestroy() {
-    if (this.userRoleSubscription) {
-      this.userRoleSubscription.unsubscribe();
-    }
   }
 
   updateNavbar() {
