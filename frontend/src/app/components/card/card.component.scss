@@ -36,4 +36,14 @@ button {
     }
    
   }
-  
+   
+p {
+    width: max-content;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+::ng-deep .p-card-content {
+    padding: 0;
+  }

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,8 @@ import { CardComponent } from '../../components/card/card.component';
 import { ButtonModule } from 'primeng/button';
 
 import { SessionService } from '../../services/session.service';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +24,8 @@ export class HomeComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly sessionService = inject(SessionService);
   private userRoleSubscription: Subscription | null = null;
+
+  @ViewChild('cardsSection') cardsSection: ElementRef | undefined;
 
   userRol = signal<number>(0);
 
@@ -105,6 +109,12 @@ export class HomeComponent implements OnInit {
     },
   ];
 
+  scrollToCards() {
+    if (this.cardsSection && this.cardsSection.nativeElement) {
+      this.cardsSection.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   onBuy(id: number) {
     if (this.userRol() != 0) {
       console.log(this.userRol())
@@ -112,7 +122,20 @@ export class HomeComponent implements OnInit {
 
       this.router.navigate(['/buy']);
     } else {
-      console.log('No tienes permisos para comprar');
+      Swal.fire({
+        title: '¿Desea iniciar sesión?',
+        text: 'Para comprar boletos primero debe iniciar sesión',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, iniciar sesión'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login']);
+        }
+      });
     }
   }
 }
