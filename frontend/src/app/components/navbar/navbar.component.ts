@@ -16,19 +16,20 @@ import { faHome, faPencilAlt, faPhone, faComments, IconDefinition, faCircleUser,
 
 import { SessionService } from '../../services/session.service';
 
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [ MenubarModule, AvatarModule, InputTextModule, RippleModule, CommonModule, FontAwesomeModule, MenuModule, ButtonModule ]
+  imports: [MenubarModule, AvatarModule, InputTextModule, RippleModule, CommonModule, FontAwesomeModule, MenuModule, ButtonModule]
 })
 
 export class NavbarComponent implements OnInit {
 
   private userRoleSubscription: Subscription | null = null;
-  
+
   userRol = signal<number>(0);
   navUser = signal<MenuItem[]>([]);
   opcUser = signal<MenuItem[]>([]);
@@ -86,7 +87,7 @@ export class NavbarComponent implements OnInit {
         this.opcUser.set([
           { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { separator: true },
-          { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
+          { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
 
@@ -103,7 +104,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Cupones', command: () => this.goToPage('cupons') },
           { separator: true },
           { label: 'Editar perfil', command: () => this.goToPage('profile') },
-          { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
+          { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
 
@@ -121,10 +122,34 @@ export class NavbarComponent implements OnInit {
           { label: 'Registrarse', command: () => this.goToPage('register') },
           { separator: true },
           { label: 'Editar perfil', command: () => this.goToPage('profile') },
-          { label: 'Cerrar sesión', command: () => this.sessionService.clearSession() }
+          { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
     }
+  }
+
+  logout() {
+    Swal.fire({
+      title: "¿Desea cerrar sesión?",
+      showDenyButton: true,
+      confirmButtonText: "Sí"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: "success",
+          title: "Sesión cerrada!",
+          showConfirmButton: false,
+          timer: 1700,
+          allowOutsideClick: false,
+        });
+
+        this.sessionService.clearSession()
+
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1700);
+      }
+    });
   }
 
   goToPage(page: string) {
@@ -146,4 +171,7 @@ export class NavbarComponent implements OnInit {
     return this.faSpinner;
   }
 
+  navHome() {
+    this.goToPage('home');
+  }
 }

@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node server.js --port 4000",
-    "start": "node server.js --port 4000",
+    "dev": "node --watch server.js --port 4000",
+    "start": "node --watch server.js --port 4000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

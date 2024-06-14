@@ -1,23 +1,24 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
-import Swal from 'sweetalert2';
-
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
 import { tap, catchError } from 'rxjs';
 
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { SessionService } from '../../services/session.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule],
+  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule, ImageModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -35,16 +36,16 @@ export class LoginComponent {
 
   async onSubmit() {
     console.log('Iniciando sesion...');
-    // Swal.fire({
-    //   title: 'Cargando...',
-    //   text: 'Por favor espera',
-    //   allowOutsideClick: false,
-    //   allowEscapeKey: false,
-    //   showConfirmButton: false,
-    //   willOpen: () => {
-    //     Swal.showLoading();
-    //   }
-    // });
+    Swal.fire({
+      title: 'Iniciando sesion...',
+      text: 'Por favor espera',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+      }
+    });
 
     if (this.email != "" && this.password != "") {
 
@@ -56,42 +57,59 @@ export class LoginComponent {
         .pipe(
           tap(async response => {
             console.log(response);
-            switch (response.status) {              
+            switch (response.status) {
               case 201:
+                Swal.close();
                 const result = await this.authService.verifyPassword(this.password, response.result[0].Contrasena);
 
                 if (result) {
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Sesion iniciada correctamente",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  
                   this.sessionService.setSessionToken(response.result[0]);
-                  this.router.navigate(['/home']);
+                  
+                  setTimeout(() => {                    
+                    this.router.navigate(['/home']);
+                  }, 1500);                                    
 
                 } else {
-                  console.log('Credenciales incorrectas...');
+                  Swal.fire({
+                    position: 'center',
+                    icon: "info",
+                    title: "Credenciales incorrectas...",
+                    showConfirmButton: false,
+                    timer: 1700,
+                    allowOutsideClick: false,
+                  });
                 }
-
                 break;
 
               case 404:
-                console.log('Registro fallido:', response);
+                Swal.fire({
+                  position: 'center',
+                  icon: "info",
+                  title: "Credenciales incorrectas...",
+                  showConfirmButton: false,
+                  timer: 1700,
+                  allowOutsideClick: false,
+                });                
                 break;
 
             }
 
           }),
           catchError(error => {
-            console.error('Error al enviar los datos:', error);
+            // console.error('Error al enviar los datos:', error);
             throw error;
           })
         ).subscribe();
 
     } else {
-      // Swal.fire({
-      //   position: "center",
-      //   icon: "info",
-      //   title: "No se aceptan campos vacios...",
-      //   showConfirmButton: false,
-      //   timer: 1500
-      // });
-
       Swal.fire({
         position: 'center',
         icon: "info",
@@ -99,9 +117,7 @@ export class LoginComponent {
         showConfirmButton: false,
         timer: 1700,
         allowOutsideClick: false,
-    });
-
-      console.log("No se aceptan campos vacios...");
+      });
     }
   }
 

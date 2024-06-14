@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+$morado: #3A0F56;
+$rosado: #DC3970;
+$dorado: #FDB748;
+
 body {        
     margin: 0;
     padding: 0;
@@ -35,3 +39,4 @@ body {
     font-family: 'Karma-Medium';
     src: url('./assets/fonts/Karma-Medium.ttf');
 }
+

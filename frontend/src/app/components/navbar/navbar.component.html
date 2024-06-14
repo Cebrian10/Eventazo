@@ -1,7 +1,7 @@
 <p-menubar [model]="navUser()" class="shadow">
     <ng-template pTemplate="start">
         <div class="ng-start">
-            <img src="../assets/logoticket.png" alt="logoticket">
+            <img (click)="navHome()" src="../assets/logoticket.png" alt="logoticket">
         </div>
     </ng-template>
 
@@ -17,7 +17,7 @@
     <ng-template pTemplate="end">
         <div class="ng-end">
             <div class="flex align-items-center gap-2">                
-                <input type="password" id="password" name="password" placeholder="Buscar evento..."
+                <input type="text" id="eventos" name="eventos" placeholder="Buscar evento..."
                     class="searchbar border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" />
 
                 <p-menu #menu [model]="opcUser()" [popup]="true" />

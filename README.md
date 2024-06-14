@@ -50,6 +50,7 @@ pnpm start
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs): Librería para hash de contraseñas en JavaScript. Versión utilizada: **2.4.3**.
 - [Tailwind CSS](https://tailwindcss.com/): Framework de utilidades de CSS de bajo nivel. Versión utilizada: **3.4.3**.
 - [React Router DOM](https://reactrouter.com/web/guides/quick-start): Enrutador para aplicaciones web React. Versión utilizada: **6.23.1**.
+- [SweetAlert2](https://sweetalert2.github.io/): Biblioteca para mostrar ventanas modales con estilos personalizables. Versión utilizada: **11.11.1**.
 
 
 ## Backend

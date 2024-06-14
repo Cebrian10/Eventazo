@@ -1,17 +1,11 @@
-<app-homecito></app-homecito>
+<app-homecito (verEventosClicked)="scrollToCards()"></app-homecito>
 
-<section class="cards p-2">
-  
-    <div *ngFor="let card of cards">
-      <app-card
-        [id]="card.id"
-        [header]="card.header"
-        [subheader]="card.subheader"
-        [image]="card.image"
-        [description]="card.description"
-        [date]="card.date"
-        (buy)="onBuy($event)">
-      </app-card>
-    </div>    
+<section class="cards p-2" #cardsSection>
+
+  <div *ngFor="let card of cards">
+    <app-card [id]="card.id" [header]="card.header" [subheader]="card.subheader" [image]="card.image"
+      [description]="card.description" [date]="card.date" (buy)="onBuy($event)">
+    </app-card>
+  </div>
 
 </section>

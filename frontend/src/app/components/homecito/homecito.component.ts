@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { ImageModule } from 'primeng/image';
 import { ButtonModule } from 'primeng/button';
@@ -11,5 +11,11 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './homecito.component.scss'
 })
 export class HomecitoComponent {
+
+  @Output() verEventosClicked = new EventEmitter<void>();
+
+  emitirEventoVerEventos() {
+    this.verEventosClicked.emit();
+  }
 
 }
