@@ -1,4 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -18,6 +19,7 @@ import { SessionService } from '../../services/session.service';
 })
 export class HomeComponent implements OnInit {
 
+  private readonly router = inject(Router);
   private readonly sessionService = inject(SessionService);
   private userRoleSubscription: Subscription | null = null;
 
@@ -34,7 +36,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 1',
       subheader: 'Card Subheader 1',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Atlapa',
       date: '1 JUN'
     },
     {
@@ -42,7 +44,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 2',
       subheader: 'Card Subheader 2',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Centro Figali',
       date: '2 JUN'
     },
     {
@@ -50,7 +52,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 3',
       subheader: 'Card Subheader 3',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Instituto America',
       date: '3 JUN'
     },
     {
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 4',
       subheader: 'Card Subheader 4',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Comunidad Apostolica Hosanna',
       date: '4 JUN'
     },
     {
@@ -66,7 +68,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 5',
       subheader: 'Card Subheader 5',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Rio de Janeiro',
       date: '5 JUN'
     },
     {
@@ -74,7 +76,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 6',
       subheader: 'Card Subheader 6',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Narnia',
       date: '6 JUN'
     },
     {
@@ -82,7 +84,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 7',
       subheader: 'Card Subheader 7',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Universidad Tecnologica de Panama',
       date: '7 JUN'
     },
     {
@@ -90,7 +92,7 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 8',
       subheader: 'Card Subheader 8',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Se me acaban las ideas',
       date: '8 JUN'
     },
     {
@@ -98,17 +100,19 @@ export class HomeComponent implements OnInit {
       header: 'Advanced Card 9',
       subheader: 'Card Subheader 9',
       image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...',
+      description: 'Albrook Mall',
       date: '9 JUN'
     },
   ];
 
   onBuy(id: number) {
-    console.log(this.userRol())
-    console.log('Card ID:', id);
+    if (this.userRol() != 0) {
+      console.log(this.userRol())
+      console.log('Card ID:', id);
+
+      this.router.navigate(['/buy']);
+    } else {
+      console.log('No tienes permisos para comprar');
+    }
   }
-
-
 }
-
-
