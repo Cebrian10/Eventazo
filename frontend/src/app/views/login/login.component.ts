@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
 import { tap, catchError } from 'rxjs';
 
 import { ApiService } from '../../services/api.service';
@@ -17,7 +18,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule],
+  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule, ImageModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

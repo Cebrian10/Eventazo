@@ -1,0 +1,61 @@
+.contenedor {
+    background-image: url('../../../assets/concierto.jpg');
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 195px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .formulario {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .formulario h1 {
+    font-family: 'Karma-Bold';
+    color: #333;
+    font-size: 1.75rem;    
+    text-align: center;
+}
+
+.formulario label {
+    font-family: 'Karma-SemiBold';
+    display: block;
+    font-size: 1rem;  
+    margin-bottom: 8px;
+}
+  
+  .formulario input {
+    width: 100%; /* Ancho completo del input */
+    padding: 10px; /* Espacio interno dentro del input */
+    margin-bottom: 16px; /* Espacio entre inputs */
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 4px; /* Bordes redondeados del input */
+  }
+  
+  .formulario button {
+    width: 100%; /* Ancho completo del botón */
+    padding: 12px; /* Espacio interno dentro del botón */
+    margin-top: 16px; /* Espacio arriba del botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados del botón */
+    cursor: pointer; /* Cambia el cursor a pointer al pasar sobre el botón */
+  }
+  
+  @media (max-width: 768px) {
+    .contenedor {
+        height: calc(100vh - 201px);
+    }
+    
+    .formulario {
+      max-width: 90%; /* Reducir el ancho máximo en dispositivos más pequeños */
+    }
+  }
+  

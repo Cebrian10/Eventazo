@@ -171,4 +171,7 @@ export class NavbarComponent implements OnInit {
     return this.faSpinner;
   }
 
+  navHome() {
+    this.goToPage('home');
+  }
 }

@@ -12,10 +12,7 @@ import { tap, catchError } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
-interface RolUsuario {
-  name: string;
-  value: number;
-}
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -35,31 +32,23 @@ export class RegisterComponent {
   lastname: string = "";
   email: string = "";
   password: string = "";
-
-  roles: RolUsuario[] | undefined;
-  selectedRol: RolUsuario | undefined;
+  id_rol: number = 0;
 
   constructor() { }
 
-  ngOnInit() {
-    this.roles = [
-      { name: 'Regular', value: 2 },
-      { name: 'Promotor', value: 3 }
-    ];
-  }
-
   async onSubmit() {
-    if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.selectedRol?.value != undefined) {
+    console.log(this.id_rol)
+    if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_rol != 0) {
 
       const formData = {
         Nombre: this.name,
         Apellido: this.lastname,
         Correo: this.email,
         Contrasena: await this.authService.hashPassword(this.password),
-        ID_RolUsuario: this.selectedRol.value
+        ID_RolUsuario: this.id_rol
       };
 
-      this.apiService.postUsuario('usuario', formData)
+      this.apiService.postUsuario('usuario2', formData)
         .pipe(
           tap(response => {
 
@@ -91,7 +80,14 @@ export class RegisterComponent {
         ).subscribe();
 
     } else {
-      console.log("No se aceptan campos vacios...");
+      Swal.fire({
+        position: 'center',
+        icon: "info",
+        title: "No se aceptan campos vacios...",
+        showConfirmButton: false,
+        timer: 1700,
+        allowOutsideClick: false,
+      });
     }
   }
 
