@@ -14,7 +14,7 @@ import { Step4Component } from './views/steps/step4/step4.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'buy', component: BuyComponent },
+    { path: 'buy/:id', component: BuyComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FaqComponent },
     { path: 'home', component: HomeComponent },

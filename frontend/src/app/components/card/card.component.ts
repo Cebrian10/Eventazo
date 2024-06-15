@@ -15,16 +15,20 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 export class CardComponent {
   faLocationDot = faLocationDot;
 
-  @Input() id!: number;
-  @Input() header: string = '';
+  @Input() ID!: number;
+  @Input() Nombre: string = '';
   @Input() subheader: string = '';
-  @Input() image: string = '';
-  @Input() description: string = '';
-  @Input() date: string = '';
+  @Input() Foto: string = '';
+  @Input() Lugar: string = '';
+  @Input() Dia_Hora_Inicio: string = '';
+
+  @Input() disabled: boolean = false;
 
   @Output() buy: EventEmitter<number> = new EventEmitter<number>();
 
-  onBuy() {
-    this.buy.emit(this.id);
+  buyEvent() {
+    if (!this.disabled) {
+      this.buy.emit(this.ID);
+    }
   }
 }

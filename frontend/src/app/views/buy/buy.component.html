@@ -1,21 +1,35 @@
-<div class="card">
-    <p-steps [model]="items" [readonly]="false"></p-steps>
-    <div class="step-content">
-        <ng-container>
-            @if(currentStep === 'step1'){
-            <app-step1></app-step1>
-            } @else if (currentStep === 'step2') {
-            <app-step2></app-step2>
-            } @else if (currentStep === 'step3') {
-            <app-step3></app-step3>
-            } @else if (currentStep === 'step4') {
-            <app-step4></app-step4>
-            }
-        </ng-container>
-    </div>
+<section class="buy">
+    <section class="steps">
+        <p-steps [model]="items" [readonly]="false" 
+            [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)" />
 
-    <div class="navigation-buttons">
-        <button (click)="previousStep()">Anterior</button>
-        <button (click)="nextStep()">Siguiente</button>
-    </div>
-</div>
+        <section class="step-content">
+            <ng-container>
+                @if(currentStep === 'step1'){
+                    <app-step1></app-step1>
+                } @else if (currentStep === 'step2') {
+                    <app-step2></app-step2>
+                } @else if (currentStep === 'step3') {
+                    <app-step3></app-step3>
+                } @else if (currentStep === 'step4') {
+                    <app-step4></app-step4>
+                }
+            </ng-container>
+        </section>
+
+        <section class="navigation-buttons">
+
+        </section>
+    </section>
+
+    <section class="card">
+        <app-card 
+            [ID]="card.ID" 
+            [Nombre]="card.Nombre"             
+            [Foto]="card.Foto"
+            [Lugar]="card.Lugar" 
+            [Dia_Hora_Inicio]="card.Dia_Hora_Inicio"
+            [disabled]="true">
+        </app-card>
+    </section>
+</section>

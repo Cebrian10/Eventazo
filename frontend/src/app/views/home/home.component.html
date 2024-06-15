@@ -1,10 +1,16 @@
 <app-homecito (verEventosClicked)="scrollToCards()"></app-homecito>
 
-<section class="cards p-2" #cardsSection>
+<section class="cards p-3" #cardsSection>
 
   <div *ngFor="let card of cards">
-    <app-card [id]="card.id" [header]="card.header" [subheader]="card.subheader" [image]="card.image"
-      [description]="card.description" [date]="card.date" (buy)="onBuy($event)">
+    <app-card 
+      [ID]="card.ID" 
+      [Nombre]="card.Nombre"
+      [Foto]="card.Foto"
+      [Lugar]="card.Lugar" 
+      [Dia_Hora_Inicio]="card.Dia_Hora_Inicio" 
+      [disabled]="false"
+      (buy)="buyEvent($event)">
     </app-card>
   </div>
 

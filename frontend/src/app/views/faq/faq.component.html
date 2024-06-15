@@ -1,1 +1,5 @@
-<p>faq works!</p>
+<form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+  <label for="appointment">Selecciona fecha y hora:</label>
+  <input type="datetime-local" id="appointment" formControlName="appointmentDateTime">
+  <button type="submit">Guardar</button>
+</form>

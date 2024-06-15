@@ -8,6 +8,7 @@ import { CardComponent } from '../../components/card/card.component';
 
 import { ButtonModule } from 'primeng/button';
 
+import { ApiService } from '../../services/api.service';
 import { SessionService } from '../../services/session.service';
 
 import Swal from 'sweetalert2';
@@ -22,92 +23,32 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
 
   private readonly router = inject(Router);
+  private readonly apiService = inject(ApiService);
   private readonly sessionService = inject(SessionService);
+
   private userRoleSubscription: Subscription | null = null;
 
   @ViewChild('cardsSection') cardsSection: ElementRef | undefined;
 
   userRol = signal<number>(0);
+  cards: any[] = [];
 
   ngOnInit() {
     this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => this.userRol.set(roleId));
     this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
-  }
 
-  cards = [
-    {
-      id: 1,
-      header: 'Advanced Card 1',
-      subheader: 'Card Subheader 1',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Atlapa',
-      date: '1 JUN'
-    },
-    {
-      id: 2,
-      header: 'Advanced Card 2',
-      subheader: 'Card Subheader 2',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Centro Figali',
-      date: '2 JUN'
-    },
-    {
-      id: 3,
-      header: 'Advanced Card 3',
-      subheader: 'Card Subheader 3',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Instituto America',
-      date: '3 JUN'
-    },
-    {
-      id: 4,
-      header: 'Advanced Card 4',
-      subheader: 'Card Subheader 4',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Comunidad Apostolica Hosanna',
-      date: '4 JUN'
-    },
-    {
-      id: 5,
-      header: 'Advanced Card 5',
-      subheader: 'Card Subheader 5',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Rio de Janeiro',
-      date: '5 JUN'
-    },
-    {
-      id: 6,
-      header: 'Advanced Card 6',
-      subheader: 'Card Subheader 6',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Narnia',
-      date: '6 JUN'
-    },
-    {
-      id: 7,
-      header: 'Advanced Card 7',
-      subheader: 'Card Subheader 7',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Universidad Tecnologica de Panama',
-      date: '7 JUN'
-    },
-    {
-      id: 8,
-      header: 'Advanced Card 8',
-      subheader: 'Card Subheader 8',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Se me acaban las ideas',
-      date: '8 JUN'
-    },
-    {
-      id: 9,
-      header: 'Advanced Card 9',
-      subheader: 'Card Subheader 9',
-      image: 'https://primefaces.org/cdn/primeng/images/card-ng.jpg',
-      description: 'Albrook Mall',
-      date: '9 JUN'
-    },
-  ];
+    this.apiService.getEventos('evento').subscribe((response) => {
+      this.cards = response.result;
+      response.result.forEach((evento: { Dia_Hora_Inicio: string; }) => {
+        const fecha = new Date(evento.Dia_Hora_Inicio);
+        const dia = fecha.getDate();
+        const mes = fecha.toLocaleString('default', { month: 'short' }).toUpperCase();
+        const fechaFormateada = `${dia} ${mes}`;
+        evento.Dia_Hora_Inicio = fechaFormateada.toString();
+      });
+    });
+
+  }
 
   scrollToCards() {
     if (this.cardsSection && this.cardsSection.nativeElement) {
@@ -115,12 +56,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onBuy(id: number) {
+  buyEvent(id: number) {
     if (this.userRol() != 0) {
-      console.log(this.userRol())
-      console.log('Card ID:', id);
-
-      this.router.navigate(['/buy']);
+      this.router.navigate(['/buy', id]);
     } else {
       Swal.fire({
         title: '¿Desea iniciar sesión?',
