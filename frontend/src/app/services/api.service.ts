@@ -27,7 +27,16 @@ export class ApiService {
 
   postEventoId(endpoint: string): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
-    console.log(url)
+    return this.http.post<any>(url, {});
+  }
+
+  getBoletos(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get<any>(url);
+  }
+
+  postBoletoPorIdEvento(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, {});
   }
 

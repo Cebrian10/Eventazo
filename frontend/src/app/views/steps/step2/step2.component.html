@@ -1,1 +1,29 @@
-<p>Contenido del Step 2</p>
+<section class="form-container">
+    <label for="informacion">Información de compra</label>
+    <section class="flex-container">
+        @if(loading){
+        <p-skeleton width="15rem" height="3rem" class="mr-3" />
+        <p-skeleton width="15rem" height="3rem" class="mr-3" />
+        <p-skeleton width="15rem" height="3rem" class="mr-3" />
+        } @else{
+        <div *ngFor="let boleto of boletosFiltrados; let i = index" class="mb-2 mr-7">
+            <p>Boleto #{{ i + 1 }}</p>
+
+            <label for="codAsiento">Código de asiento:
+                <span>
+                    {{ (boleto.ID_TipoBoleto === 1) ? 'PLAT-' + '123' : '' }}
+                    {{ (boleto.ID_TipoBoleto === 2) ? 'GOLD-' + '234' : '' }}
+                    {{ (boleto.ID_TipoBoleto === 3) ? 'SILV-' + '345' : '' }}
+                    {{ (boleto.ID_TipoBoleto === 4) ? 'GENE-' + '456' : '' }}
+                </span>
+            </label>
+
+            <label for="preAsiento">Precio de asiento:
+                <span>
+                    ${{ boleto.Costo }}
+                </span>
+            </label>
+        </div>
+        }
+    </section>
+</section>

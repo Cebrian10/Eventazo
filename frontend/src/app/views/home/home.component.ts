@@ -7,6 +7,7 @@ import { HomecitoComponent } from '../../components/homecito/homecito.component'
 import { CardComponent } from '../../components/card/card.component';
 
 import { ButtonModule } from 'primeng/button';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { ApiService } from '../../services/api.service';
 import { SessionService } from '../../services/session.service';
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HomecitoComponent, CardComponent, ButtonModule],
+  imports: [CommonModule, HomecitoComponent, CardComponent, ButtonModule, SkeletonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -32,12 +33,13 @@ export class HomeComponent implements OnInit {
 
   userRol = signal<number>(0);
   cards: any[] = [];
+  loading = true;
 
   ngOnInit() {
     this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => this.userRol.set(roleId));
     this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
 
-    this.apiService.getEventos('evento').subscribe((response) => {
+    this.apiService.getEventos('evento').subscribe((response) => {      
       this.cards = response.result;
       response.result.forEach((evento: { Dia_Hora_Inicio: string; }) => {
         const fecha = new Date(evento.Dia_Hora_Inicio);
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit {
         const fechaFormateada = `${dia} ${mes}`;
         evento.Dia_Hora_Inicio = fechaFormateada.toString();
       });
+      this.loading = false;
     });
 
   }
