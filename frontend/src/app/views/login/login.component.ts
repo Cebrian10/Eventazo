@@ -70,12 +70,18 @@ export class LoginComponent {
                     showConfirmButton: false,
                     timer: 1500
                   });
-                  
+
                   this.sessionService.setSessionToken(response.result[0]);
-                  
-                  setTimeout(() => {                    
-                    this.router.navigate(['/home']);
-                  }, 1500);                                    
+
+                  if (response.result[0].ID_RolUsuario === 1) {
+                    setTimeout(() => {
+                      this.router.navigate(['/events']);
+                    }, 1500);
+                  } else {
+                    setTimeout(() => {
+                      this.router.navigate(['/home']);
+                    }, 1500);
+                  }
 
                 } else {
                   Swal.fire({
@@ -97,7 +103,7 @@ export class LoginComponent {
                   showConfirmButton: false,
                   timer: 1700,
                   allowOutsideClick: false,
-                });                
+                });
                 break;
 
             }
