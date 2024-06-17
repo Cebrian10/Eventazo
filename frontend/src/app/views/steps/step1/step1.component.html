@@ -1,1 +1,19 @@
-<p>Contenido del Step 1</p>
+<section class="form-container">
+  <form>
+    <div>
+      <label for="cantidad">¿Cuántos boletos desea adquirir?</label>
+      <input type="number" name="ticketsCount" [(ngModel)]="ticketsCount" (input)="onTicketsCountChange($event)" min="1" />
+    </div>
+    <div>
+      <label for="tipo" class="tipo-label">¿De qué tipo?</label>
+      <div class="flex-container">
+        <div *ngFor="let ticket of [].constructor(ticketsCount); let i = index" class="select-container">
+          <p>Boleto #{{i + 1}}</p>
+          <select name="id_tipoboleto_{{i}}">
+            <option *ngFor="let type of ticketTypes" [value]="type.value">{{ type.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

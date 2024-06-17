@@ -3,6 +3,7 @@ import { HomeComponent } from './views/home/home.component';
 import { NewsComponent } from './views/news/news.component';
 import { ContactComponent } from './views/contact/contact.component';
 import { FaqComponent } from './views/faq/faq.component';
+import { HistoryComponent } from './views/history/history.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { BuyComponent } from './views/buy/buy.component';
@@ -14,9 +15,10 @@ import { Step4Component } from './views/steps/step4/step4.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'buy', component: BuyComponent },
+    { path: 'buy/:id', component: BuyComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'faq', component: FaqComponent },
+    { path: 'history', component: HistoryComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'news', component: NewsComponent },
@@ -26,6 +28,6 @@ export const routes: Routes = [
     { path: 'step2', component: Step2Component },
     { path: 'step3', component: Step3Component },
     { path: 'step4', component: Step4Component },
-    
+
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

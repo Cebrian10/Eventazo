@@ -11,12 +11,33 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   postUsuario(endpoint: string, formData: any): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;    
+    const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, formData);
   }
 
   postLogin(endpoint: string, formData: any): Observable<any> {
-    const url = `${this.apiUrl}/${endpoint}`;    
+    const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, formData);
   }
+
+  getEventos(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get<any>(url);
+  }
+
+  postEventoId(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, {});
+  }
+
+  getBoletos(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get<any>(url);
+  }
+
+  postBoletoPorIdEvento(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, {});
+  }
+
 }

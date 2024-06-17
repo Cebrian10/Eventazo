@@ -34,5 +34,4 @@ export class SessionService {
 
     this.userRoleSubject.next(0);
   }
-
 }

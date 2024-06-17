@@ -3,7 +3,7 @@
 .card-footer {
     justify-content: space-between;
     align-items: center;
-    margin: 0;    
+    margin: 0;
 }
 
 p-card {
@@ -22,6 +22,11 @@ button {
     font-size: 1.125rem;
 }
 
+img {
+    object-fit: cover;
+    height: 250px;
+}
+
 .location {
     display: flex;
     align-items: center;
@@ -34,11 +39,10 @@ button {
         margin-right: 0.5rem;
         color: $dorado;
     }
-   
-  }
-   
-p {
-    width: max-content;
+
+}
+
+::ng-deep .p-card-title, p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -46,4 +50,4 @@ p {
 
 ::ng-deep .p-card-content {
     padding: 0;
-  }
+}
