@@ -3,7 +3,7 @@ import { pool } from '../database/connection.js'
 // GET getAllUsuario
 export async function obtenerTodosLosUsuarios() {
   try {
-    const [result] = await pool.query('CALL obtenerTodosLosUsuarios()');
+    const [result] = await pool.query('CALL ObtenerTodosLosUsuarios()');
     return result[0];
   } catch (error) {
     console.error('Error fetching obtenerTodosLosUsuarios:', error);
@@ -14,7 +14,7 @@ export async function obtenerTodosLosUsuarios() {
 // GET getUsuarioByEmail
 export async function obtenerUsuarioPorCorreo(req) {
   try {
-    const [result] = await pool.query('CALL obtenerUsuarioPorCorreo(?)', [
+    const [result] = await pool.query('CALL ObtenerUsuarioPorCorreo(?)', [
       req.body.Correo
     ]);
     return result[0];
