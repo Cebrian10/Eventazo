@@ -10,10 +10,17 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { BuyComponent } from './views/buy/buy.component';
 
+// Promotor routes
+import { PromotorComponent } from './views/promotor/promotor.component';	
+import { NeweventComponent } from './views/promotor/newevent/newevent.component';
+import { PromoDashComponent } from './views/promotor/dashboard/promo-dash.component';
+// Promotor routes
+
 import { Step1Component } from './views/steps/step1/step1.component';
 import { Step2Component } from './views/steps/step2/step2.component';
 import { Step3Component } from './views/steps/step3/step3.component';
 import { Step4Component } from './views/steps/step4/step4.component';
+import path from 'path';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,6 +39,24 @@ export const routes: Routes = [
     { path: 'step2', component: Step2Component },
     { path: 'step3', component: Step3Component },
     { path: 'step4', component: Step4Component },
+
+// Promotor Rutas
+{
+    path: 'promotor',
+    component: PromotorComponent,
+    children: [ 
+        { 
+            path: 'newevent',
+            component: NeweventComponent
+        },
+        {
+            path: 'dashboard',
+            component: PromoDashComponent
+        }
+    ]
+},
+
+
 
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
