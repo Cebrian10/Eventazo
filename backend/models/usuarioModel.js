@@ -14,9 +14,8 @@ export async function obtenerTodosLosUsuarios() {
 // GET getUsuarioByEmail
 export async function obtenerUsuarioPorCorreo(req) {
   try {
-    const [result] = await pool.query('CALL ObtenerUsuarioPorCorreo(?)', [
-      req.body.Correo
-    ]);
+    const { Correo } = req.body;
+    const [result] = await pool.query('CALL ObtenerUsuarioPorCorreo(?)', [ Correo ]);
     return result[0];
   }catch (error) {
     console.error('Error fetching obtenerUsuarioPorCorreo:', error);
@@ -27,9 +26,8 @@ export async function obtenerUsuarioPorCorreo(req) {
 // POST createUsuario
 export async function crearUsuario(req) {
   try {    
-    const [result] = await pool.query('CALL CrearUsuario(?, ?, ?, ?, ?)', [
-      req.body.Nombre, req.body.Apellido, req.body.Correo, req.body.Contrasena, req.body.ID_RolUsuario
-    ]);
+    const { Nombre, Apellido, Correo, Contrasena, ID_RolUsuario } = req.body;
+    const [result] = await pool.query('CALL CrearUsuario(?, ?, ?, ?, ?)', [ Nombre, Apellido, Correo, Contrasena, ID_RolUsuario ]);
     return result.affectedRows > 0;
   } catch (error) {
     console.error('Error fetching crearUsuario:', error);

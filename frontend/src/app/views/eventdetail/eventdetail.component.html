@@ -19,11 +19,11 @@
 
             <div>
                 <label for="dia-final">Dia - Hora de finalización</label>
-                <input type="text" name="dia-final" id="dia-final" value="{{ event.DiaFinal }}" disabled />
+                <input type="text" name="dia-final" id="dia-final" value="{{ event.Dia_Hora_Final }}" disabled />
             </div>
         </section>
 
-        <section class="flex flex-wrap description-img">
+        <section class="flex flex-wrap description-img-bolets">
             <div class="description">
                 <label for="detalles">Descripción</label>
                 <textarea name="detalles" id="detalles" disabled>{{ event.Detalles }}</textarea>
@@ -92,7 +92,7 @@
     </form>
 
     <section class="buttons">
-        <button type="click" (click)="rechazarEvento(event.ID)" class="btn-rojo mr-1">Rechazar</button>
-        <button type="click" (click)="aprobarEvento(event.ID)" class="btn-verde ml-1">Aprobar</button>
+        <button type="click" (click)="statusEvent('rejected', event.ID)" class="btn-rojo mr-1">Rechazar</button>
+        <button type="click" (click)="statusEvent('approved', event.ID)" class="btn-verde ml-1">Aprobar</button>
     </section>
 </section>

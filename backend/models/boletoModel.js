@@ -14,9 +14,8 @@ export async function obtenerBoletos() {
 // GET getBoletoById
 export async function obtenerBoletoPorId(req) {
   try {
-    const [result] = await pool.query('CALL ObtenerBoletoPorIdEvento(?)', [
-      req.params.id
-    ]);
+    const { ID } = req.params;
+    const [result] = await pool.query('CALL ObtenerBoletoPorIdEvento(?)', [ ID ]);
     return result[0];
   }catch (error) {
     console.error('Error fetching obtenerBoletoPorId:', error);

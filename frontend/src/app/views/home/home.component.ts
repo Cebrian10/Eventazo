@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
         evento.Dia_Hora_Inicio = fechaFormateada.toString();
       });
       this.loading = false;
+      console.log(this.cards)
     });
 
   }

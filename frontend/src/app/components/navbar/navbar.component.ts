@@ -66,7 +66,7 @@ export class NavbarComponent implements OnInit {
         this.navUser.set([
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
           // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
-          // { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }, //OPCIONAL
+          { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' },
         ]);
 
         this.opcUser.set([
@@ -97,7 +97,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
           // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
-          // { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' } //OPCIONAL
+          { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }
         ]);
 
         this.opcUser.set([
@@ -153,10 +153,9 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  goToPage(page: string) {
-    this.router.navigate([`/${page}`])
-  }
-
+  goToPage = (page: string) => this.router.navigate([`/${page}`]);
+  navHome = () => this.goToPage('home');
+  
   getIcon(iconName: string): IconDefinition {
     if (iconName === 'faHome') return this.faHome;
     if (iconName === 'faPencilAlt') return this.faPencilAlt;
@@ -170,9 +169,5 @@ export class NavbarComponent implements OnInit {
     if (iconName === 'faCalendarCheck') return this.faCalendarCheck;
     if (iconName === 'faUsers') return this.faUsers;
     return this.faSpinner;
-  }
-
-  navHome() {
-    this.goToPage('home');
-  }
+  }  
 }
