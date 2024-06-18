@@ -65,8 +65,8 @@ export class NavbarComponent implements OnInit {
       case 0:
         this.navUser.set([
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
-          { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' },
-          { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' },
+          // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
+          // { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }, //OPCIONAL
         ]);
 
         this.opcUser.set([
@@ -79,7 +79,7 @@ export class NavbarComponent implements OnInit {
       case 1:
         this.navUser.set([
           { label: 'Eventos', command: () => this.goToPage('events'), icon: 'faCalendarCheck' },
-          { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' },
+          // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
           { label: 'Mensajes', command: () => this.goToPage('messages'), icon: 'faPhone' },
           { label: 'Users', command: () => this.goToPage('users'), icon: 'faUsers' },
         ]);
@@ -95,13 +95,13 @@ export class NavbarComponent implements OnInit {
       case 2:
         this.navUser.set([
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
-          { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' },
+          // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
-          { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }
+          // { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' } //OPCIONAL
         ]);
 
         this.opcUser.set([
-          { label: 'Cupones', command: () => this.goToPage('cupons') },
+          // { label: 'Cupones', command: () => this.goToPage('cupons') }, //OPCIONAL
           { label: 'Historial de compras', command: () => this.goToPage('history') },
           { separator: true },
           { label: 'Editar perfil', command: () => this.goToPage('profile') },
@@ -115,7 +115,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
           { label: 'Publicar', command: () => this.goToPage('publish'), icon: 'faBullhorn' },
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
-          { label: 'Estadísticas', command: () => this.goToPage('stadistic'), icon: 'faChartSimple' }
+          // { label: 'Estadísticas', command: () => this.goToPage('stadistic'), icon: 'faChartSimple' } //OPCIONAL
         ]);
 
         this.opcUser.set([
