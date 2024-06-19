@@ -41,20 +41,9 @@ export const routes: Routes = [
     { path: 'step4', component: Step4Component },
 
 // Promotor Rutas
-{
-    path: 'promotor',
-    component: PromotorComponent,
-    children: [ 
-        { 
-            path: 'newevent',
-            component: NeweventComponent
-        },
-        {
-            path: 'dashboard',
-            component: PromoDashComponent
-        }
-    ]
-},
+{ path: 'promotor', component: PromotorComponent },
+{ path: 'promotor/newevent', component: NeweventComponent },
+{ path: 'promotor/dashboard', component: PromoDashComponent },
 
 
 

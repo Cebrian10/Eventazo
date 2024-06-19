@@ -1,87 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-.contenedor {
-    background-image: url('../../../../assets/concierto.jpg');
-    background-size: cover;
-    background-position: center;
-    height: calc(100vh - 195px);
+
+
+.container-cards {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-}
-
-.formulario {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    max-width: 60%;
-    width: 100%;
-    border-radius: 8px;
-}
-
-.formulario h1 {
-    font-family: 'Karma-Bold';
-    color: #333;
-    font-size: 1.75rem;    
-    text-align: center;
-}
-
-.formulario label {
-    font-family: 'Karma-SemiBold';
-    display: block;
-    font-size: 1rem;  
-    margin-bottom: 8px;
-}
-
-.formulario input,
-.formulario select {
-    width: 95%;
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.formulario button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.flex div {
-    width: 50%;
-}
-
-.div-button {
-    display: flex;
-    align-items: center;
-}
-
-@media (max-width: 768px) {
-    .contenedor {
-        height: calc(100vh - 20px);
-    }
-
-    .formulario {
-        max-width: 90%;
-    }
-
-    .flex {
-        flex-direction: column;
-    }
-
-    .flex div {
-        width: 100%;
-    }
-
-    .formulario input,
-    .formulario select {
-        width: 100%;
-    }
 }

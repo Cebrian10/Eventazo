@@ -119,8 +119,7 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Iniciar sesión', command: () => this.goToPage('login') },
-          { label: 'Registrarse', command: () => this.goToPage('register') },
+          { label: 'Mis eventos', command: () => this.goToPage('myevents') },
           { separator: true },
           { label: 'Editar perfil', command: () => this.goToPage('profile') },
           { label: 'Cerrar sesión', command: () => this.logout() }
