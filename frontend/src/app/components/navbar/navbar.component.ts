@@ -142,11 +142,10 @@ export class NavbarComponent implements OnInit {
           showConfirmButton: false,
           timer: 1700,
           allowOutsideClick: false,
-        });
-
-        this.sessionService.clearSession()
+        });        
 
         setTimeout(() => {
+          this.sessionService.clearSession()
           this.router.navigate(['/home']);
         }, 1700);
       }

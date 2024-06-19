@@ -32,12 +32,14 @@ export class HomeComponent implements OnInit {
   @ViewChild('cardsSection') cardsSection: ElementRef | undefined;
 
   userRol = signal<number>(0);
+  userID = signal<number>(0);
   cards: any[] = [];
   loading = true;
 
   ngOnInit() {
     this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => this.userRol.set(roleId));
     this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
+    this.userID.set(isNaN(parseInt(this.sessionService.getIdUserToken(), 10)) ? 0 : parseInt(this.sessionService.getIdUserToken(), 10));
 
     this.apiService.getEventos('evento').subscribe((response) => {      
       this.cards = response.result;
@@ -48,8 +50,7 @@ export class HomeComponent implements OnInit {
         const fechaFormateada = `${dia} ${mes}`;
         evento.Dia_Hora_Inicio = fechaFormateada.toString();
       });
-      this.loading = false;
-      console.log(this.cards)
+      this.loading = false;   
     });
 
   }

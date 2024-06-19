@@ -68,19 +68,12 @@ export class LoginComponent {
                     title: "Sesion iniciada correctamente",
                     showConfirmButton: false,
                     timer: 1500
-                  });
+                  });                  
 
-                  this.sessionService.setSessionToken(response.result[0]);
-
-                  if (response.result[0].ID_RolUsuario === 1) {
-                    setTimeout(() => {
-                      this.router.navigate(['/events']);
-                    }, 1500);
-                  } else {
-                    setTimeout(() => {
-                      this.router.navigate(['/home']);
-                    }, 1500);
-                  }
+                  setTimeout(() => {
+                    this.sessionService.setSessionToken(response.result[0]);
+                    this.router.navigate([(response.result[0].ID_RolUsuario === 1) ? '/events' : '/home']);
+                  }, 1500);
 
                 } else {
                   Swal.fire({

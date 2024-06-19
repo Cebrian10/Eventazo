@@ -8,7 +8,7 @@
     }
   } @else {  
     @for(card of cards; track card.ID){
-      @if(card.Status === 1 ){
+      @if(card.Status === 1 && userRol() === 2 || card.Status === 1 && userRol() === 0){
         <app-card 
           [ID]="card.ID" 
           [Nombre]="card.Nombre" 
@@ -17,18 +17,20 @@
           [Dia_Hora_Inicio]="card.Dia_Hora_Inicio" 
           [disabled]="false" (buy)="buyEvent($event)">
         </app-card>
-      } @else if(card.Status === 0) {
+      }
+
+      @if(card.ID_Promotor === userID()){
         @if(userRol() === 3){
-          <app-card class="card-disabled"
+          <app-card class="{{ (card.Status === 0) ? 'card-disabled' : (card.Status === 1) ? '' : 'card-rejected' }}"
             [ID]="card.ID" 
             [Nombre]="card.Nombre" 
             [Foto]="card.Foto" 
             [Lugar]="card.Lugar"
             [Dia_Hora_Inicio]="card.Dia_Hora_Inicio" 
             [disabled]="false" (buy)="buyEvent($event)">
-        </app-card>
+          </app-card>
         }
-      }      
+      }
     }
   }
 
