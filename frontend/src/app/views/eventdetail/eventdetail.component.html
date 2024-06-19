@@ -1,1 +1,98 @@
-<p>eventdetail works!</p>
+<section class="form-container">
+    <h1>Información del Evento</h1>
+    <form>
+        <section class="flex justify-between flex-wrap">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" value="{{ event.Nombre }}" disabled />
+            </div>
+
+            <div>
+                <label for="nombre">Lugar</label>
+                <input type="text" name="lugar" id="lugar" value="{{ event.Lugar }}" disabled />
+            </div>
+
+            <div>
+                <label for="dia-inicio">Dia - Hora de inicio</label>
+                <input type="text" name="dia-inicio" id="dia-inicio" value="{{ event.Dia_Hora_Inicio }}" disabled />
+            </div>
+
+            <div>
+                <label for="dia-final">Dia - Hora de finalización</label>
+                <input type="text" name="dia-final" id="dia-final" value="{{ event.Dia_Hora_Final }}" disabled />
+            </div>
+        </section>
+
+        <section class="flex flex-wrap description-img-bolets">
+            <div class="description">
+                <label for="detalles">Descripción</label>
+                <textarea name="detalles" id="detalles" disabled>{{ event.Detalles }}</textarea>
+            </div>
+            <div class="img">
+                <label for="foto">Foto</label>
+                @if(loading){
+                <p-skeleton shape="rectangle" width="338px" height="238px" class="mb-2"></p-skeleton>
+                } @else {
+                <img src="{{ event.Foto }}" alt="Foto del evento" />
+                }
+
+            </div>
+            <div class="bolets">
+                <label for="boletos">Boletos</label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="px-3 py-3">Nombre</th>
+                            <th scope="col" class="px-3 py-3">Cantidad</th>
+                            <th scope="col" class="px-3 py-3">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(loading) {
+                        <tr>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                        </tr>
+                        <tr>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                        </tr>
+                        <tr>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                        </tr>
+                        <tr>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                            <td><p-skeleton styleClass="mb-2" /></td>
+                        </tr>
+                        } @else {
+                        @for(boleto of boletos; track boleto.ID){
+                        <tr>
+                            <td>
+                                @if(boleto.ID_TipoBoleto === 1){ Platinum }
+                                @if(boleto.ID_TipoBoleto === 2){ Gold }
+                                @if(boleto.ID_TipoBoleto === 3){ Silver }
+                                @if(boleto.ID_TipoBoleto === 4){ General }
+                            </td>
+                            <td>{{ boleto.Cantidad }}</td>
+                            <td>${{ boleto.Costo }}</td>
+                        </tr>
+                        }
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </section>        
+    </form>
+
+    <section class="buttons">
+        <button type="click" (click)="statusEvent('rejected', event.ID)" class="btn-rojo mr-1">Rechazar</button>
+        <button type="click" (click)="statusEvent('approved', event.ID)" class="btn-verde ml-1">Aprobar</button>
+    </section>
+</section>

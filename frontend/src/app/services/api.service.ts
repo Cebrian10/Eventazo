@@ -40,4 +40,9 @@ export class ApiService {
     return this.http.post<any>(url, {});
   }
 
+  putStatusEvento(endpoint: string, formData: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.put<any>(url, formData);
+  }
+
 }
