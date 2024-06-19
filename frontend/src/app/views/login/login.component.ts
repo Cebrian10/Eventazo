@@ -56,7 +56,6 @@ export class LoginComponent {
       this.apiService.postLogin('usuario/login', formData)
         .pipe(
           tap(async response => {
-            console.log(response);
             switch (response.status) {
               case 201:
                 Swal.close();
@@ -69,13 +68,12 @@ export class LoginComponent {
                     title: "Sesion iniciada correctamente",
                     showConfirmButton: false,
                     timer: 1500
-                  });
-                  
-                  this.sessionService.setSessionToken(response.result[0]);
-                  
-                  setTimeout(() => {                    
-                    this.router.navigate(['/home']);
-                  }, 1500);                                    
+                  });                  
+
+                  setTimeout(() => {
+                    this.sessionService.setSessionToken(response.result[0]);
+                    this.router.navigate([(response.result[0].ID_RolUsuario === 1) ? '/events' : '/home']);
+                  }, 1500);
 
                 } else {
                   Swal.fire({
@@ -97,7 +95,7 @@ export class LoginComponent {
                   showConfirmButton: false,
                   timer: 1700,
                   allowOutsideClick: false,
-                });                
+                });
                 break;
 
             }

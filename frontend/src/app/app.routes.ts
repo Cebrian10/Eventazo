@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { NewsComponent } from './views/news/news.component';
 import { ContactComponent } from './views/contact/contact.component';
+import { EventdetailComponent } from './views/eventdetail/eventdetail.component';
+import { EventsComponent } from './views/events/events.component';
 import { FaqComponent } from './views/faq/faq.component';
 import { HistoryComponent } from './views/history/history.component';
 import { LoginComponent } from './views/login/login.component';
@@ -17,6 +19,8 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'buy/:id', component: BuyComponent },
     { path: 'contact', component: ContactComponent },
+    { path: 'event/:id', component: EventdetailComponent },
+    { path: 'events', component: EventsComponent },    
     { path: 'faq', component: FaqComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'home', component: HomeComponent },

@@ -9,4 +9,7 @@ router.route('/')
 router.route('/:id')
     .post(eventoController.getEvent)
 
+router.route('/status')
+    .put(eventoController.updateStatus)
+
 export default router;

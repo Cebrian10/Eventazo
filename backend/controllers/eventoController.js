@@ -5,7 +5,7 @@ async function getEvents(req, res) {
         const result = await eventoModel.obtenerEventos();
         res.json({ status: 201, result: result });
 
-    } catch (error) { res.json({ status: 500, message: 'Error getEvents: ' + error.message }); }
+    } catch (error) { res.json({ status: 500, message: 'Error getEvents: ' + error.message }) }
 }
 
 async function getEvent(req, res) {
@@ -19,10 +19,20 @@ async function getEvent(req, res) {
             res.json({ status: 404, message: 'Evento no registrado' });
         }
 
-    } catch (error) { res.json({ status: 500, message: 'Error getEvent: ' + error.message }); }
+    } catch (error) { res.json({ status: 500, message: 'Error getEvent: ' + error.message }) }
+}
+
+async function updateStatus(req, res) {
+    try {
+        const result = await eventoModel.actualizarStatus(req);
+        res.json({ status: 201, message: 'Status actualizado correctamente', result: result });
+
+    }
+    catch (error) { res.json({ status: 500, message: 'Error updateStatus: ' + error.message }) }
 }
 
 export {
     getEvents,
-    getEvent
+    getEvent,
+    updateStatus
 }

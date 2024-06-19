@@ -37,7 +37,6 @@ export class RegisterComponent {
   constructor() { }
 
   async onSubmit() {
-    console.log(this.id_rol)
     if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_rol != 0) {
 
       const formData = {

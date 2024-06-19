@@ -14,12 +14,23 @@ export async function obtenerEventos() {
 // GET getEventById
 export async function obtenerEventoPorId(req) {
   try {
-    const [result] = await pool.query('CALL ObtenerEventoPorId(?)', [
-      req.params.id
-    ]);
+    const { ID } = req.params;
+    const [result] = await pool.query('CALL ObtenerEventoPorId(?)', [ ID ]);
     return result[0];
-  }catch (error) {
+  } catch (error) {
     console.error('Error fetching obtenerEventoPorId:', error);
+    throw error;
+  }
+}
+
+// POST updateStatus
+export async function actualizarStatus(req) {
+  try {
+    const { ID_Evento, Status } = req.body;    
+    const [result] = await pool.query('CALL ActualizarStatus(?, ?)', [ ID_Evento, Status ]);
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error('Error fetching actualizarStatus:', error);
     throw error;
   }
 }
