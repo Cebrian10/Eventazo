@@ -55,7 +55,7 @@ export class LoginComponent {
 
       this.apiService.postLogin('usuario/login', formData)
         .pipe(
-          tap(async response => {
+          tap(async response => {            
             switch (response.status) {
               case 201:
                 Swal.close();

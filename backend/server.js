@@ -6,7 +6,7 @@ import eventoRoutes from './routes/eventoRoutes.js';
 import boletoRoutes from './routes/boletoRoutes.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT ?? 4000;
 
 // Permitir solicitudes CORS
 app.use(cors()); 

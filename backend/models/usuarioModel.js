@@ -34,3 +34,15 @@ export async function crearUsuario(req) {
     throw error;
   }  
 }
+
+// GET getUsuarioById
+export async function obtenerUsuarioPorId(req) {
+  try {
+    const { id } = req.params;
+    const [result] = await pool.query('CALL ObtenerUsuarioPorId(?)', [ id ]);
+    return result[0];
+  } catch (error) {
+    console.error('Error fetching obtenerUsuarioPorId:', error);
+    throw error;
+  }
+}

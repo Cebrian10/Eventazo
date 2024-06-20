@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -6,16 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:4000/api';
-
-  constructor(private http: HttpClient) { }
+  private readonly apiUrl = 'http://localhost:4000/api';
+  private readonly http = inject(HttpClient);  
 
   postUsuario(endpoint: string, formData: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, formData);
   }
 
-  postLogin(endpoint: string, formData: any): Observable<any> {
+  postUsuarioPorId(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, {});
+  }
+
+  postLogin(endpoint: string, formData: any): Observable<any> {    
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, formData);
   }

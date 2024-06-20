@@ -1,1 +1,46 @@
-<p>contact works!</p>
+<div class="contenedor">
+    <div class="formulario">
+      <h1 class="mb-5">Formulario de contacto</h1>
+      <form method="post">
+        <div class="flex">
+          <div>
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+            <input type="text" id="name" name="name" value="{{ datosUsuario.Nombre }}"
+              class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" />
+          </div>
+  
+          <div>
+            <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900">Apellido</label>
+            <input type="text" id="lastname" name="lastname" value="{{ datosUsuario.Apellido }}"
+              class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" />
+          </div>
+        </div>
+  
+        <div class="flex">
+          <div>
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Correo electrónico</label>
+            <input type="email" id="email" name="email" value="{{ datosUsuario.Correo }}"
+              class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" />
+          </div>
+  
+          <div>
+            <label for="asunto" class="block mb-2 text-sm font-medium text-gray-900">Asunto</label>
+            <input type="text" id="asunto" name="asunto"
+              class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" />
+          </div>
+        </div>
+  
+        <div class="flex flex-col">
+          <div class="w-full-med">
+            <label for="detalles" class="block mb-2 text-sm font-medium text-gray-900">Detalles</label>
+            <textarea name="detalles" id="detalles"></textarea>
+          </div>
+          <div class="div-button w-full">
+            <button type="submit"
+              class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Enviar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+  </div>
