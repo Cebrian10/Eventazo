@@ -13,12 +13,15 @@ import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { SessionService } from '../../services/session.service';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule, ImageModule],
+  imports: [FormsModule, InputTextModule, FloatLabelModule, PasswordModule, ButtonModule, ImageModule, FontAwesomeModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -31,6 +34,11 @@ export class LoginComponent {
 
   email: string = "";
   password: string = "";
+
+  passwordVisible: boolean = false;
+
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   constructor() { }
 
@@ -55,7 +63,7 @@ export class LoginComponent {
 
       this.apiService.postLogin('usuario/login', formData)
         .pipe(
-          tap(async response => {            
+          tap(async response => {
             switch (response.status) {
               case 201:
                 Swal.close();
@@ -68,7 +76,7 @@ export class LoginComponent {
                     title: "Sesion iniciada correctamente",
                     showConfirmButton: false,
                     timer: 1500
-                  });                  
+                  });
 
                   setTimeout(() => {
                     this.sessionService.setSessionToken(response.result[0]);
@@ -118,5 +126,11 @@ export class LoginComponent {
       });
     }
   }
+
+  viewPassword(passwordInput: HTMLInputElement) {
+    this.passwordVisible = !this.passwordVisible;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+  }
+
 
 }

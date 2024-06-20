@@ -8,6 +8,8 @@ import { FaqComponent } from './views/faq/faq.component';
 import { HistoryComponent } from './views/history/history.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { UsersComponent } from './views/users/users.component';
+import { MessagesComponent } from './views/messages/messages.component';
 import { BuyComponent } from './views/buy/buy.component';
 
 import { Step1Component } from './views/steps/step1/step1.component';
@@ -25,8 +27,10 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'messages', component: MessagesComponent },
     { path: 'news', component: NewsComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'users', component: UsersComponent },
 
     { path: 'step1', component: Step1Component },
     { path: 'step2', component: Step2Component },

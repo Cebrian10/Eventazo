@@ -33,7 +33,7 @@ export class Step2Component implements OnInit {
       const parsedPuestos = JSON.parse(storedPuestos) as string[];
       this.listaPuestos = parsedPuestos.map(puesto => parseInt(puesto, 10));
     }
-
+    
     this.apiService.postBoletoPorIdEvento('boleto/' + this.ID).subscribe((response) => {
       this.listaBoletos = response.result;
 
