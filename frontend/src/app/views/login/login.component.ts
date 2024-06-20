@@ -43,7 +43,6 @@ export class LoginComponent {
   constructor() { }
 
   async onSubmit() {
-    console.log('Iniciando sesion...');
     Swal.fire({
       title: 'Iniciando sesion...',
       text: 'Por favor espera',

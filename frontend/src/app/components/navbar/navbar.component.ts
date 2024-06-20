@@ -28,12 +28,6 @@ import Swal from 'sweetalert2';
 
 export class NavbarComponent implements OnInit {
 
-  private userRoleSubscription: Subscription | null = null;
-
-  userRol = signal<number>(0);
-  navUser = signal<MenuItem[]>([]);
-  opcUser = signal<MenuItem[]>([]);
-
   faHome = faHome;
   faNewspaper = faNewspaper;
   faPhone = faPhone;
@@ -51,13 +45,18 @@ export class NavbarComponent implements OnInit {
   private readonly sessionService = inject(SessionService);
   private readonly router = inject(Router);
 
+  userRol = signal<number>(0);
+  userID = signal<number>(0);
+  navUser = signal<MenuItem[]>([]);
+  opcUser = signal<MenuItem[]>([]);
+
   ngOnInit() {
-    this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => {
+    this.sessionService.userRole$.subscribe(roleId => {
       this.userRol.set(roleId)
       this.updateNavbar();
     });
-    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
-    this.updateNavbar();
+
+    this.sessionService.userID$.subscribe(Id => this.userID.set(Id));
   }
 
   updateNavbar() {
@@ -86,7 +85,7 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Editar perfil', command: () => this.goToPage('profile') },
+          { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { separator: true },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
@@ -98,6 +97,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
           // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
+          { label: 'Mensajes', command: () => this.goToPage('messages'), icon: 'faMessage' },
           { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }
         ]);
 
@@ -105,7 +105,7 @@ export class NavbarComponent implements OnInit {
           // { label: 'Cupones', command: () => this.goToPage('cupons') }, //OPCIONAL
           { label: 'Historial de compras', command: () => this.goToPage('history') },
           { separator: true },
-          { label: 'Editar perfil', command: () => this.goToPage('profile') },
+          { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
@@ -122,7 +122,7 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Editar perfil', command: () => this.goToPage('profile') },
+          { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
@@ -153,6 +153,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToPage = (page: string) => this.router.navigate([`/${page}`]);
+
   navHome = () => this.goToPage('home');
 
   getIcon(iconName: string): IconDefinition {

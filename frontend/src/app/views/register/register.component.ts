@@ -27,6 +27,9 @@ import Swal from 'sweetalert2';
 
 export class RegisterComponent {
 
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
+
   private readonly router = inject(Router);
   private readonly apiService = inject(ApiService);
   private readonly authService = inject(AuthService);
@@ -38,11 +41,6 @@ export class RegisterComponent {
   id_rol: number = 0;
 
   passwordVisible: boolean = false;
-
-  faEye = faEye;
-  faEyeSlash = faEyeSlash;
-
-  constructor() { }
 
   async onSubmit() {
     if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_rol != 0) {

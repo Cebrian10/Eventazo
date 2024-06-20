@@ -18,7 +18,6 @@ export class FaqComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Inicializa el control de formulario con la fecha y hora actual, si es necesario
     this.appointmentForm.patchValue({
       appointmentDateTime: new Date().toISOString().substring(0, 16)
     });
@@ -26,6 +25,5 @@ export class FaqComponent implements OnInit {
 
   onSubmit() {
     console.log('Fecha y hora seleccionadas:', this.appointmentForm.value.appointmentDateTime);
-    // Aquí puedes manejar el valor de la fecha y hora seleccionadas
   }
 }
