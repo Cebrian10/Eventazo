@@ -1,1 +1,25 @@
-<p>messages works!</p>
+<section class="contenedor">
+    <section class="title">
+        <h1 class="mb-5 mt-5">Lista de mensajes</h1>
+    </section>
+
+    <section class="tabla m-2.5">
+        <p-table [value]="listaMensajes" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">Nombre</th>
+                    <th class="px-4 py-2">Lugar</th>
+                    <th class="px-4 py-2">Dia - Hora de inicio</th>
+                    <th class="px-4 py-2">Dia - Hora de finalización</th>
+                    <th class="px-4 py-2">Aprobar / Rechazar</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-evento>
+                <tr>
+                 
+                </tr>
+            </ng-template>
+        </p-table>
+    </section>
+</section>

@@ -9,8 +9,16 @@ import contactoRoutes from './routes/contactoRoutes.js';
 const app = express();
 const PORT = process.env.PORT ?? 4000;
 
-// Permitir solicitudes CORS
-app.use(cors()); 
+// ['https://ld4jl3w6-3000.use2.devtunnels.ms', 'http://localhost:3000'],
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

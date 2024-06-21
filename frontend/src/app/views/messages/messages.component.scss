@@ -1,0 +1,29 @@
+@import '../../../styles.scss';
+
+h1 {
+    font-family: 'Karma-Bold';
+    color: #333;
+    font-size: 1.75rem;
+    text-align: start;
+    margin-left: 1.625rem;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.button {
+    text-align: center;
+}
+
+.btn-azul:hover {
+    background-color: $azul-hover;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        text-align: center;
+        margin: 0;
+    }
+}

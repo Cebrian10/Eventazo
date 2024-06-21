@@ -56,7 +56,10 @@ export class NavbarComponent implements OnInit {
       this.updateNavbar();
     });
 
-    this.sessionService.userID$.subscribe(Id => this.userID.set(Id));
+    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
+    this.updateNavbar();
+
+    this.userID.set(isNaN(parseInt(this.sessionService.getIdUserToken(), 10)) ? 0 : parseInt(this.sessionService.getIdUserToken(), 10));
   }
 
   updateNavbar() {

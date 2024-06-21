@@ -42,8 +42,21 @@ export class ContactComponent implements OnInit {
   }
 
   async onSubmit() {
+
+    if (this.datosUsuario.Asunto == null || this.datosUsuario.Detalles == null) {
+      Swal.fire({
+        position: 'center',
+        icon: "info",
+        title: "No se aceptan campos vacios...",
+        showConfirmButton: false,
+        timer: 1700,
+        allowOutsideClick: false,
+      });
+      return
+    }
+
     const formData = {
-      "ID": this.userID(),      
+      "ID": this.userID(),
       "Asunto": this.datosUsuario.Asunto,
       "Detalles": this.datosUsuario.Detalles
     }
@@ -52,19 +65,14 @@ export class ContactComponent implements OnInit {
       .pipe(
         tap(async response => {
           switch (response.status) {
-            
+
             case 201:
               Swal.fire({
                 title: 'Mensaje enviado',
                 text: 'Gracias por contactarnos',
                 icon: 'success',
                 confirmButtonText: 'Aceptar'
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  this.router.navigate(['/home']);
-                }
-              });
-              
+              }).then((result) => { if (result.isConfirmed) { this.router.navigate(['/home']) } });
               break;
 
             case 400:
