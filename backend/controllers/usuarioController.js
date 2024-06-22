@@ -1,7 +1,7 @@
 import * as usuarioModel from '../models/usuarioModel.js';
 
 async function getAllUsuario(req, res) {
-  try {
+  try {    
     const result = await usuarioModel.obtenerTodosLosUsuarios();
     res.json({ status: 201, result: result });
 
@@ -21,7 +21,7 @@ async function createUsuario(req, res) {
       } else {
         res.json({ status: 404, message: 'Error al crear usuario' });
       }
-      
+
     }
 
   } catch (error) { res.json({ status: 500, message: 'Error createUsuario: ' + error.message }); }
@@ -41,8 +41,17 @@ async function getUsuario(req, res) {
   } catch (error) { res.json({ status: 500, message: 'Error getUsuario: ' + error.message }); }
 }
 
+async function getUsuarioById(req, res) {
+  try {
+    const result = await usuarioModel.obtenerUsuarioPorId(req);
+    res.json({ status: 201, result: result });
+
+  } catch (error) { res.json({ status: 500, message: 'Error getUsuarioById: ' + error.message }); }
+}
+
 export {
   getAllUsuario,
   createUsuario,
-  getUsuario
+  getUsuario,
+  getUsuarioById
 };

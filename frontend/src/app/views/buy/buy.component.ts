@@ -93,24 +93,18 @@ export class BuyComponent implements OnInit {
         text: 'Se ha realizado el pago exitosamente',
         icon: 'success',
         confirmButtonText: 'Aceptar'
-      });      
+      });
     }, 2000);
-    
+
     localStorage.removeItem('listaPuestos');
     this.goToPage(Step.Step4);
   }
 
-  goToHome() {
-    this.router.navigate(['/home']);
-  }
+  goToHome = () => this.router.navigate(['/home']);  
 
   guardarPuestos() {
     this.listaPuestos = [];
-
-    document.querySelectorAll('select').forEach((select: HTMLSelectElement) => {
-      this.listaPuestos.push(select.value);
-    });
-
+    document.querySelectorAll('select').forEach((select: HTMLSelectElement) => this.listaPuestos.push(select.value));
     localStorage.setItem('listaPuestos', JSON.stringify(this.listaPuestos));
   }
 }

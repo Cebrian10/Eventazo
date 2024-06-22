@@ -12,6 +12,9 @@ export class SessionService {
   private userRoleSubject = new BehaviorSubject<number>(0);
   userRole$ = this.userRoleSubject.asObservable();
 
+  private userIDSubject = new BehaviorSubject<number>(0);
+  userID$ = this.userIDSubject.asObservable();
+
   setSessionToken(formData: any): | void {
     this.cookieService.set('loggedToken', 'true');
     this.cookieService.set('idUserToken', formData.ID);
@@ -19,6 +22,7 @@ export class SessionService {
     this.cookieService.set('idRolToken', formData.ID_RolUsuario);
 
     this.userRoleSubject.next(formData.ID_RolUsuario);
+    this.userIDSubject.next(formData.ID);
   }
 
   getLoggedToken = (): string => this.cookieService.get('loggedToken');
@@ -33,5 +37,6 @@ export class SessionService {
     this.cookieService.delete('idRolToken');
 
     this.userRoleSubject.next(0);
+    this.userIDSubject.next(0);
   }
 }

@@ -12,7 +12,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faPencilAlt, faPhone, faComments, IconDefinition, faCircleUser, faNewspaper, faCircleQuestion, faSpinner, faBullhorn, faChartSimple, faCalendarCheck, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPencilAlt, faPhone, faComments, IconDefinition, faCircleUser, faNewspaper, faCircleQuestion, faSpinner, faBullhorn, faChartSimple, faCalendarCheck, faUsers, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 import { SessionService } from '../../services/session.service';
 
@@ -28,12 +28,6 @@ import Swal from 'sweetalert2';
 
 export class NavbarComponent implements OnInit {
 
-  private userRoleSubscription: Subscription | null = null;
-
-  userRol = signal<number>(0);
-  navUser = signal<MenuItem[]>([]);
-  opcUser = signal<MenuItem[]>([]);
-
   faHome = faHome;
   faNewspaper = faNewspaper;
   faPhone = faPhone;
@@ -46,17 +40,26 @@ export class NavbarComponent implements OnInit {
   faChartSimple = faChartSimple;
   faCalendarCheck = faCalendarCheck;
   faUsers = faUsers;
+  faMessage = faMessage;
 
   private readonly sessionService = inject(SessionService);
   private readonly router = inject(Router);
 
+  userRol = signal<number>(0);
+  userID = signal<number>(0);
+  navUser = signal<MenuItem[]>([]);
+  opcUser = signal<MenuItem[]>([]);
+
   ngOnInit() {
-    this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => {
+    this.sessionService.userRole$.subscribe(roleId => {
       this.userRol.set(roleId)
       this.updateNavbar();
     });
+
     this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
     this.updateNavbar();
+
+    this.userID.set(isNaN(parseInt(this.sessionService.getIdUserToken(), 10)) ? 0 : parseInt(this.sessionService.getIdUserToken(), 10));
   }
 
   updateNavbar() {
@@ -85,7 +88,7 @@ export class NavbarComponent implements OnInit {
         ]);
 
         this.opcUser.set([
-          { label: 'Editar perfil', command: () => this.goToPage('profile') },
+          { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { separator: true },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
@@ -97,6 +100,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
           // { label: 'Noticias', command: () => this.goToPage('news'), icon: 'faNewspaper' }, //OPCIONAL
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
+          { label: 'Mensajes', command: () => this.goToPage('messages'), icon: 'faMessage' },
           { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }
         ]);
 
@@ -104,7 +108,7 @@ export class NavbarComponent implements OnInit {
           // { label: 'Cupones', command: () => this.goToPage('cupons') }, //OPCIONAL
           { label: 'Historial de compras', command: () => this.goToPage('history') },
           { separator: true },
-          { label: 'Editar perfil', command: () => this.goToPage('profile') },
+          { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
@@ -115,14 +119,13 @@ export class NavbarComponent implements OnInit {
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
           { label: 'Publicar', command: () => this.goToPage('publish'), icon: 'faBullhorn' },
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
+          { label: 'Mensajes', command: () => this.goToPage('messages'), icon: 'faMessage' },
+          { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }
           // { label: 'Estadísticas', command: () => this.goToPage('stadistic'), icon: 'faChartSimple' } //OPCIONAL
         ]);
 
         this.opcUser.set([
-          { label: 'Iniciar sesión', command: () => this.goToPage('login') },
-          { label: 'Registrarse', command: () => this.goToPage('register') },
-          { separator: true },
-          { label: 'Editar perfil', command: () => this.goToPage('profile') },
+          { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
         break;
@@ -142,7 +145,7 @@ export class NavbarComponent implements OnInit {
           showConfirmButton: false,
           timer: 1700,
           allowOutsideClick: false,
-        });        
+        });
 
         setTimeout(() => {
           this.sessionService.clearSession()
@@ -153,8 +156,9 @@ export class NavbarComponent implements OnInit {
   }
 
   goToPage = (page: string) => this.router.navigate([`/${page}`]);
+
   navHome = () => this.goToPage('home');
-  
+
   getIcon(iconName: string): IconDefinition {
     if (iconName === 'faHome') return this.faHome;
     if (iconName === 'faPencilAlt') return this.faPencilAlt;
@@ -167,6 +171,7 @@ export class NavbarComponent implements OnInit {
     if (iconName === 'faChartSimple') return this.faChartSimple;
     if (iconName === 'faCalendarCheck') return this.faCalendarCheck;
     if (iconName === 'faUsers') return this.faUsers;
+    if (iconName === 'faMessage') return this.faMessage;
     return this.faSpinner;
-  }  
+  }
 }

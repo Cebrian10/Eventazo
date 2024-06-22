@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -6,13 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:4000/api';
+  private readonly apiUrl = 'http://localhost:4000/api';
+  private readonly http = inject(HttpClient);
 
-  constructor(private http: HttpClient) { }
+  getUsers(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get<any>(url);
+  }
 
   postUsuario(endpoint: string, formData: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, formData);
+  }
+
+  postUsuarioPorId(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, {});
   }
 
   postLogin(endpoint: string, formData: any): Observable<any> {
@@ -43,6 +52,21 @@ export class ApiService {
   putStatusEvento(endpoint: string, formData: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.put<any>(url, formData);
+  }
+
+  postContact(endpoint: string, formData: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, formData);
+  }
+
+  getMessages(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get<any>(url);
+  }
+
+  postMessagePorId(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, {});
   }
 
 }
