@@ -5,10 +5,13 @@ import { TableModule } from 'primeng/table';
 import { ApiService } from '../../services/api.service';
 import { SessionService } from '../../services/session.service';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faEye, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [SkeletonModule, TableModule],
+  imports: [SkeletonModule, TableModule, FontAwesomeModule],
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
@@ -20,7 +23,13 @@ export class MessagesComponent implements OnInit {
   userID = signal<number>(0);
   userRol = signal<number>(0);
   loading = true;
-  listaMensajes: any[] = [];
+
+  listaMessages: any[] = []
+  messagesUser: any[] = []
+
+  faEye = faEye;
+  faCheck = faCheck;
+  faTimes = faTimes;
 
   ngOnInit(): void {
     const idUserToken = parseInt(this.sessionService.getIdUserToken(), 10);
@@ -33,9 +42,12 @@ export class MessagesComponent implements OnInit {
     const method = this.userRol() === 1 ? this.apiService.getMessages : this.apiService.postMessagePorId;
 
     method.call(this.apiService, endpoint)
-      .subscribe((data) => {
-        this.listaMensajes = data.result;
+      .subscribe((data) => {        
+        this.listaMessages = data.result;
         this.loading = false;
+        console.log(this.listaMessages);
       });
   }
+
+  statusMessage = (id: number) => console.log(id);
 }

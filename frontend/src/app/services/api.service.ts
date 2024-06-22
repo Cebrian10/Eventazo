@@ -9,6 +9,11 @@ export class ApiService {
   private readonly apiUrl = 'http://localhost:4000/api';
   private readonly http = inject(HttpClient);
 
+  getUsers(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.get<any>(url);
+  }
+
   postUsuario(endpoint: string, formData: any): Observable<any> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<any>(url, formData);
