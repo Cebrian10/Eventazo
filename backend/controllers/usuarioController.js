@@ -49,9 +49,23 @@ async function getUsuarioById(req, res) {
   } catch (error) { res.json({ status: 500, message: 'Error getUsuarioById: ' + error.message }); }
 }
 
+async function deleteUsuario(req, res) {
+  try {
+    const result = await usuarioModel.eliminarUsuario(req);
+    if(result){
+      res.json({ status: 201, result: result });
+    } else {
+      res.json({ status: 404, message: 'Error al eliminar usuario' });
+    }
+
+  } catch (error) { res.json({ status: 500, message: 'Error deleteUsuario: ' + error.message }); }
+
+}
+
 export {
   getAllUsuario,
   createUsuario,
   getUsuario,
-  getUsuarioById
+  getUsuarioById,
+  deleteUsuario
 };

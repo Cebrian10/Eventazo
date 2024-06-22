@@ -49,5 +49,7 @@ export class MessagesComponent implements OnInit {
       });
   }
 
-  statusMessage = (id: number) => console.log(id);
+  statusMessage (id: number) {
+    console.log(id)
+  };
 }

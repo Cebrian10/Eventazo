@@ -5,6 +5,7 @@ import usuarioRoutes from './routes/usuarioRoutes.js';
 import eventoRoutes from './routes/eventoRoutes.js';
 import boletoRoutes from './routes/boletoRoutes.js';
 import contactoRoutes from './routes/contactoRoutes.js';
+import faqRoutes from './routes/faqRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT ?? 4000;
@@ -27,6 +28,7 @@ app.use('/api/usuario', usuarioRoutes);
 app.use('/api/evento', eventoRoutes);
 app.use('/api/boleto', boletoRoutes);
 app.use('/api/contacto', contactoRoutes);
+app.use('/api/faqs', faqRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor en ejecución en http://localhost:${PORT}`);
