@@ -14,8 +14,5 @@ export class HomecitoComponent {
 
   @Output() verEventosClicked = new EventEmitter<void>();
 
-  emitirEventoVerEventos() {
-    this.verEventosClicked.emit();
-  }
-
+  emitirEventoVerEventos = () => this.verEventosClicked.emit();  
 }

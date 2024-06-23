@@ -13,6 +13,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
+  
   faLocationDot = faLocationDot;
 
   @Input() ID!: number;
@@ -26,9 +27,5 @@ export class CardComponent {
 
   @Output() buy: EventEmitter<number> = new EventEmitter<number>();
 
-  buyEvent() {
-    if (!this.disabled) {
-      this.buy.emit(this.ID);
-    }
-  }
+  buyEvent = () => (!this.disabled) ? this.buy.emit(this.ID) : null;
 }

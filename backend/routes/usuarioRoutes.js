@@ -6,10 +6,14 @@ import * as usuarioController from '../controllers/usuarioController.js';
 router.route('/')
     .get(usuarioController.getAllUsuario)
     .post(usuarioController.createUsuario)
-    // .put(usuarioController.updateUsuario)
-    // .delete(usuarioController.deleteUsuario)
 
 router.route('/login')
     .post(usuarioController.getUsuario)
+
+router.route('/delete/:id')
+    .post(usuarioController.deleteUsuario)
+
+router.route('/:id')
+    .post(usuarioController.getUsuarioById)
 
 export default router;

@@ -12,17 +12,23 @@ import { tap, catchError } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, InputTextModule, DropdownModule, FloatLabelModule, PasswordModule, ButtonModule],
+  imports: [FormsModule, InputTextModule, DropdownModule, FloatLabelModule, PasswordModule, ButtonModule, FontAwesomeModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 
 export class RegisterComponent {
+
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
 
   private readonly router = inject(Router);
   private readonly apiService = inject(ApiService);
@@ -34,7 +40,7 @@ export class RegisterComponent {
   password: string = "";
   id_rol: number = 0;
 
-  constructor() { }
+  passwordVisible: boolean = false;
 
   async onSubmit() {
     if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_rol != 0) {
@@ -90,5 +96,8 @@ export class RegisterComponent {
     }
   }
 
-
+  viewPassword(passwordInput: HTMLInputElement) {
+    this.passwordVisible = !this.passwordVisible;
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+  }
 }

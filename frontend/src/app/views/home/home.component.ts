@@ -37,7 +37,8 @@ export class HomeComponent implements OnInit {
   loading = true;
 
   ngOnInit() {
-    this.userRoleSubscription = this.sessionService.userRole$.subscribe(roleId => this.userRol.set(roleId));
+    this.sessionService.userRole$.subscribe(roleId => this.userRol.set(roleId));
+    this.sessionService.userID$.subscribe(userId => this.userID.set(userId));
     this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
     this.userID.set(isNaN(parseInt(this.sessionService.getIdUserToken(), 10)) ? 0 : parseInt(this.sessionService.getIdUserToken(), 10));
 
@@ -52,7 +53,6 @@ export class HomeComponent implements OnInit {
       });
       this.loading = false;   
     });
-
   }
 
   scrollToCards() {
