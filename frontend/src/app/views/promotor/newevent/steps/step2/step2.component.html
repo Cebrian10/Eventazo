@@ -1,0 +1,42 @@
+<form [formGroup]="form">
+  <div class="form-section">
+    <label class="section-label">Precio de asiento por sección</label>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="seat-price-platino">Platino</label>
+        <input type="number" class="form-control" id="seatpriceplatino" formControlName="seatpriceplatino" placeholder="Precio Platino" required>
+      </div>
+      <div class="form-group">
+        <label for="seat-price-gold">Gold</label>
+        <input type="number" class="form-control" id="seatpricegold" formControlName="seatpricegold" placeholder="Precio Gold" required>
+      </div>
+      <div class="form-group">
+        <label for="seat-price-silver">Silver</label>
+        <input type="number" class="form-control" id="seatpricesilver" formControlName="seatpricesilver" placeholder="Precio Silver" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <label class="section-label">Cantidad de asientos por sección</label>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="seat-quantity-platino">Platino</label>
+        <input type="number" class="form-control" id="seatquantityplatino" formControlName="seatquantityplatino" placeholder="Cantidad Platino" required>
+      </div>
+      <div class="form-group">
+        <label for="seat-quantity-gold">Gold</label>
+        <input type="number" class="form-control" id="seatquantitygold" formControlName="seatquantitygold" placeholder="Cantidad Gold" required>
+      </div>
+      <div class="form-group">
+        <label for="seat-quantity-silver">Silver</label>
+        <input type="number" class="form-control" id="seatquantitysilver" formControlName="seatquantitysilver" placeholder="Cantidad Silver" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" (click)="onPrevious()" class="btnvolver"><fa-icon [icon]="['fas', 'arrow-left']"></fa-icon> Volver</button>
+    <button type="button" (click)="onNext()" class="btn">Publicar</button>
+  </div>
+</form>

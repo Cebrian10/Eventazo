@@ -49,6 +49,7 @@ export const routes: Routes = [
 // Promotor Rutas
 { path: 'promotor', component: PromotorComponent },
 { path: 'promotor/newevent', component: NeweventComponent },
+{ path: 'promotor/newevent/:step', component: NeweventComponent},
 { path: 'promotor/dashboard', component: PromoDashComponent },
 
 

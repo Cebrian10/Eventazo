@@ -117,7 +117,7 @@ export class NavbarComponent implements OnInit {
       case 3:
         this.navUser.set([
           { label: 'Inicio', command: () => this.goToPage('home'), icon: 'faHome' },
-          { label: 'Publicar', command: () => this.goToPage('publish'), icon: 'faBullhorn' },
+          { label: 'Publicar', command: () => this.goToPage('promotor/newevent'), icon: 'faBullhorn' },
           { label: 'Contacto', command: () => this.goToPage('contact'), icon: 'faPhone' },
           { label: 'Mensajes', command: () => this.goToPage('messages'), icon: 'faMessage' },
           { label: 'Preguntas frecuentes', command: () => this.goToPage('faq'), icon: 'faCircleQuestion' }
