@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ export class FormStateService {
   private formData: any = {};
   private formDataSubject = new BehaviorSubject<any>({});
   formData$ = this.formDataSubject.asObservable();
+
+  constructor(private http: HttpClient) {}
 
   setFormData(step: string, data: any) {
     this.formData[step] = data;
@@ -30,10 +33,19 @@ export class FormStateService {
     return this.formData[step]?.image || '';
   }
 
-  private getCombinedFormData() {
+  getCombinedFormData() {
     return {
       ...this.formData['step1'],
       ...this.formData['step2']
     };
+  }
+
+    clearFormData(): void {
+      this.formData = {};
+      this.formDataSubject.next(this.formData);
+    }
+
+  submitEvent(data: any): Observable<any> {
+    return this.http.post('/api/evento/eventos', data);
   }
 }

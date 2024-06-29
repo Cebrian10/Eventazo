@@ -1,8 +1,9 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormStateService } from '../../../../../services/form-state.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-step1',
@@ -18,12 +19,12 @@ export class Step1Component implements OnInit {
 
   constructor(private formStateService: FormStateService, private fb: FormBuilder) {
     this.form = this.fb.group({
-      name: '',
-      place: '',
-      startdate: '',
-      enddate: '',
-      details: '',
-      image: ''
+      name: ['', Validators.required],
+      place: ['', Validators.required],
+      startdate: ['', Validators.required],
+      enddate: ['', Validators.required],
+      details: ['', Validators.required],
+      image: ['', Validators.required]
     });
   }
 
@@ -40,14 +41,17 @@ export class Step1Component implements OnInit {
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result;
         this.formStateService.setImage('step1', this.imageUrl);
-        // También guardar la URL en el formulario
-        this.form.get('image')?.setValue(this.imageUrl);
+        this.form.patchValue({ image: this.imageUrl });
       };
       reader.readAsDataURL(file);
     }
   }
 
   onNext() {
+    if (this.form.invalid) {
+      Swal.fire('Error', 'Por favor, completa todos los campos', 'error');
+      return;
+    }
     this.formStateService.setFormData('step1', this.form.value);
     this.next.emit();
   }

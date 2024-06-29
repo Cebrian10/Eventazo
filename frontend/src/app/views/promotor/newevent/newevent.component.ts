@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { FormStateService } from '../../../services/form-state.service'; 
 import { CardComponent } from '../../../components/card/card.component';
@@ -33,12 +34,7 @@ export class NeweventComponent implements OnInit {
   private readonly apiService = inject(ApiService);
   private readonly authService = inject(AuthService);
   private readonly formStateService = inject(FormStateService);
-
-  name: string = "";
-  lastname: string = "";
-  email: string = "";
-  password: string = "";
-  id_rol: number = 2;
+  private readonly httpClient = inject(HttpClient);
 
   constructor(private route: ActivatedRoute, private router: Router, library: FaIconLibrary) {
     library.addIconPacks(fas);
