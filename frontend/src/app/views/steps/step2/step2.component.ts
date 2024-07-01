@@ -34,7 +34,7 @@ export class Step2Component implements OnInit {
       this.listaPuestos = parsedPuestos.map(puesto => parseInt(puesto, 10));
     }
     
-    this.apiService.postBoletoPorIdEvento('boleto/' + this.ID).subscribe((response) => {
+    this.apiService.getBoletoPorIdEvento('boleto/' + this.ID).subscribe((response) => {
       this.listaBoletos = response.result;
 
       this.listaPuestos.forEach((puesto: number) => {

@@ -1,4 +1,4 @@
-import { pool } from '../database/connection.js'
+import { pool } from '../database/connection.js';
 
 // GET getAllBoletos
 export async function obtenerBoletos() {
@@ -12,13 +12,12 @@ export async function obtenerBoletos() {
 }
 
 // GET getBoletoById
-export async function obtenerBoletoPorId(req) {
+export async function obtenerBoletosPorEventoId(id_evento) {
   try {
-    const { id } = req.params;
-    const [result] = await pool.query('CALL ObtenerBoletoPorIdEvento(?)', [ id ]);
+    const [result] = await pool.query('CALL ObtenerBoletosPorEventoId(?)', [id_evento]);
     return result[0];
-  }catch (error) {
-    console.error('Error fetching obtenerBoletoPorId:', error);
+  } catch (error) {
+    console.error('Error fetching boletos:', error);
     throw error;
   }
 }

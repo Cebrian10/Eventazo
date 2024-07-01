@@ -1,12 +1,9 @@
 import express from 'express';
+import { getAllBoletos, getBoleto } from '../controllers/boletoController.js';
+
 const router = express.Router();
 
-import * as boletoController from '../controllers/boletoController.js';
-
-router.route('/')
-    .get(boletoController.getAllBoletos)    
-
-router.route('/:id')
-    .post(boletoController.getBoleto)
+router.get('/', getAllBoletos);
+router.get('/:id_evento', getBoleto);
 
 export default router;

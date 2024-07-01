@@ -3,10 +3,8 @@ import { cloudinary } from '../config/cloudinary.js';
 
 async function createEvento(req, res) {
   try {
-    //.log('Datos recibidos en el controlador:', req.body);
     const { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatquantityplatino, seatquantitygold, seatquantitysilver } = req.body;
 
-    // Validar que todos los campos estén presentes y no vacíos
     if (!name || !place || !startdate || !enddate || !details || !image || !id_promotor ||
         !seatpriceplatino || !seatpricegold || !seatpricesilver || !seatquantityplatino || !seatquantitygold || !seatquantitysilver) {
       return res.json({ status: 400, message: 'Todos los campos son obligatorios' });
@@ -19,7 +17,6 @@ async function createEvento(req, res) {
       throw new Error('no se pudo subir la imagen al servidor');
     });
 
-    //console.log('Respuesta de la subida:', uploadResponse);
     // Obtener el enlace de la imagen subida
     const imageUrl = uploadResponse.secure_url;
 
@@ -83,9 +80,10 @@ async function updateStatus(req, res) {
   }
 }
 
+
 export {
   createEvento,
   getEvents,
   getEvent,
-  updateStatus
+  updateStatus,
 }

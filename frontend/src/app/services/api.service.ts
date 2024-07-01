@@ -26,11 +26,11 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
   }
 
-  postLogin(endpoint: string, formData: any): Observable<any> {    
+  postLogin(endpoint: string, formData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
 
-  getEventos(endpoint: string): Observable<any> {    
+  getEventos(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 
@@ -38,14 +38,14 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
   }
 
-  getBoletos(endpoint: string): Observable<any> {
+  getEventoId(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 
-  postBoletoPorIdEvento(endpoint: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
+  getBoletos(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
-
+ 
   putStatusEvento(endpoint: string, formData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
@@ -66,4 +66,11 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 
+  getEventoPorId(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
+  }
+
+  getBoletoPorIdEvento(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
+  }
 }
