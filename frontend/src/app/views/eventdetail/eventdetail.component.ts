@@ -18,7 +18,7 @@ interface Event {
 @Component({
   selector: 'app-eventdetail',
   standalone: true,
-  imports: [CommonModule, SkeletonModule], // Asegurarse de importar CommonModule
+  imports: [CommonModule, SkeletonModule],
   templateUrl: './eventdetail.component.html',
   styleUrls: ['./eventdetail.component.scss']
 })

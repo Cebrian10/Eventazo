@@ -38,12 +38,12 @@ export async function actualizarStatus(req) {
 // POST createEvento
 export async function crearEvento(req) {
   try {
-    const { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatquantityplatino, seatquantitygold, seatquantitysilver } = req;
+    const { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatpricegeneral, seatquantityplatino, seatquantitygold, seatquantitysilver, seatquantitygeneral } = req;
 
-    console.log('Datos recibidos para crear evento:', { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatquantityplatino, seatquantitygold, seatquantitysilver });
+    console.log('Datos recibidos para crear evento:', { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatpricegeneral, seatquantityplatino, seatquantitygold, seatquantitysilver, seatquantitygeneral});
     
-    const [result] = await pool.query('CALL CrearEventoNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-    [name, place, image, details, startdate, enddate, id_promotor, seatpriceplatino, seatquantityplatino, seatpricegold, seatquantitygold, seatpricesilver, seatquantitysilver]);
+    const [result] = await pool.query('CALL CrearEventoNew(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+    [name, place, image, details, startdate, enddate, id_promotor, seatpriceplatino, seatquantityplatino, seatpricegold, seatquantitygold, seatpricesilver, seatquantitysilver, seatpricegeneral, seatquantitygeneral]);
     
     if (result) {
       console.log('Evento y boletos creados correctamente');

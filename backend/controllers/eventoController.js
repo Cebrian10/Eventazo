@@ -3,10 +3,10 @@ import { cloudinary } from '../config/cloudinary.js';
 
 async function createEvento(req, res) {
   try {
-    const { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatquantityplatino, seatquantitygold, seatquantitysilver } = req.body;
+    const { name, place, startdate, enddate, details, image, id_promotor, seatpriceplatino, seatpricegold, seatpricesilver, seatpricegeneral, seatquantityplatino, seatquantitygold, seatquantitysilver, seatquantitygeneral } = req.body;
 
     if (!name || !place || !startdate || !enddate || !details || !image || !id_promotor ||
-        !seatpriceplatino || !seatpricegold || !seatpricesilver || !seatquantityplatino || !seatquantitygold || !seatquantitysilver) {
+        !seatpriceplatino || !seatpricegold || !seatpricesilver || !seatpricegeneral || !seatquantityplatino || !seatquantitygold || !seatquantitysilver || !seatquantitygeneral) {
       return res.json({ status: 400, message: 'Todos los campos son obligatorios' });
     }
 
@@ -32,9 +32,11 @@ async function createEvento(req, res) {
       seatpriceplatino,
       seatpricegold,
       seatpricesilver,
+      seatpricegeneral,
       seatquantityplatino,
       seatquantitygold,
-      seatquantitysilver
+      seatquantitysilver,
+      seatquantitygeneral
     });
 
     if (result) {

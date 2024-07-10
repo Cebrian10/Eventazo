@@ -23,6 +23,13 @@
           <small>El precio silver es requerido.</small>
         </div>
       </div>
+      <div class="form-group">
+        <label for="seat-price-general">General</label>
+        <input type="number" class="form-control" id="seatpricegeneral" formControlName="seatpricegeneral" placeholder="Precio General" required>
+        <div *ngIf="form.get('seatpricegeneral')?.invalid && form.get('seatpricegeneral')?.touched">
+          <small>El precio general es requerido.</small>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -47,6 +54,13 @@
         <label for="seat-quantity-silver">Silver</label>
         <input type="number" class="form-control" id="seatquantitysilver" formControlName="seatquantitysilver" placeholder="Cantidad Silver" required>
         <div *ngIf="form.get('seatquantitysilver')?.invalid && form.get('seatquantitysilver')?.touched">
+          <small>La cantidad silver es requerida.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="seat-quantity-general">General</label>
+        <input type="number" class="form-control" id="seatquantitygeneral" formControlName="seatquantitygeneral" placeholder="Cantidad General" required>
+        <div *ngIf="form.get('seatquantitygeneral')?.invalid && form.get('seatquantitygeneral')?.touched">
           <small>La cantidad silver es requerida.</small>
         </div>
       </div>

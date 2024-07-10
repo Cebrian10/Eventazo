@@ -5,7 +5,7 @@ import { FormStateService } from '../../../../../services/form-state.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { SessionService } from '../../../../../services/session.service'; // Asegúrate de que la ruta es correcta
+import { SessionService } from '../../../../../services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,9 +31,11 @@ export class Step2Component implements OnInit {
       seatpriceplatino: ['', Validators.required],
       seatpricegold: ['', Validators.required],
       seatpricesilver: ['', Validators.required],
+      seatpricegeneral: ['', Validators.required],
       seatquantityplatino: ['', Validators.required],
       seatquantitygold: ['', Validators.required],
-      seatquantitysilver: ['', Validators.required]
+      seatquantitysilver: ['', Validators.required],
+      seatquantitygeneral: ['', Validators.required],
     });
   }
 

@@ -37,7 +37,7 @@ export class BuyComponent implements OnInit {
   currentStep: Step = Step.Step1;
   activeIndex: number = 0;
   loading = true;
-  card = { ID: 0, Nombre: '', Foto: '', Lugar: '', Dia_Hora_Inicio: '' };
+  card = { ID: 0, Nombre: '', Foto: '', Lugar: '', Dia_Hora_Inicio: '', startdate: '', enddate: '', description: '' };
   listaPuestos: any[] = [];
 
   private readonly router = inject(Router);
@@ -54,14 +54,22 @@ export class BuyComponent implements OnInit {
       { label: 'Confirmación', command: () => this.goToPage(Step.Step4) }
     ];
 
-    this.apiService.postEventoId('evento/' + this.ID).subscribe((response) => {
-      const evento = response.result[0];
-      const fecha = new Date(evento.Dia_Hora_Inicio);
-      const dia = fecha.getDate();
-      const mes = fecha.toLocaleString('default', { month: 'short' }).toUpperCase();
-      this.card = { ...evento, Dia_Hora_Inicio: `${dia} ${mes}` };
-      this.loading = false;
-    });
+    if (this.ID) {
+      this.apiService.getEventoId(`evento/${this.ID}`).subscribe((response) => {
+        const evento = response.result[0];
+        const fecha = new Date(evento.Dia_Hora_Inicio);
+        const dia = fecha.getDate();
+        const mes = fecha.toLocaleString('default', { month: 'short' }).toUpperCase();
+        this.card = { 
+          ...evento, 
+          Dia_Hora_Inicio: `${dia} ${mes}`,
+          startdate: evento.startdate,
+          enddate: evento.enddate,
+          description: evento.details
+        };
+        this.loading = false;
+      });
+    }
   }
 
   onActiveIndexChange(index: number) {
@@ -78,14 +86,14 @@ export class BuyComponent implements OnInit {
     console.log('Procesando pago...');
 
     Swal.fire({
-      title: 'Prcedando pago...',
+      title: 'Procesando pago...',
       text: 'Espere un momento por favor',
       icon: 'info',
       showConfirmButton: false,
       willOpen: () => {
         Swal.showLoading();
       }
-    })
+    });
 
     setTimeout(() => {
       Swal.fire({
