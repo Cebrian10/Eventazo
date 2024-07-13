@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PanelModule } from 'primeng/panel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-step1',
@@ -21,12 +22,13 @@ export class Step1Component implements OnInit, AfterViewInit {
 
   listaPuestos: number[] = [];
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     const storedPuestos = localStorage.getItem('listaPuestos');
     if (storedPuestos) {
       const parsedPuestos = JSON.parse(storedPuestos) as string[];
       this.listaPuestos = parsedPuestos.map(puesto => parseInt(puesto, 10));
-
       (this.listaPuestos.length > 0) ? this.ticketsCount = this.listaPuestos.length : '';
     }
   }
@@ -51,5 +53,13 @@ export class Step1Component implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
+  guardarBoletos() {
+    const listaPuestos: number[] = [];
+    document.querySelectorAll('select').forEach((select: HTMLSelectElement) => {
+      listaPuestos.push(parseInt(select.value, 10));
+    });
+    localStorage.setItem('listaPuestos', JSON.stringify(listaPuestos));
+    this.router.navigate(['/step2']);
+  }
 }

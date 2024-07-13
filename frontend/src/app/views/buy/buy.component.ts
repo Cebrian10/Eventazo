@@ -39,12 +39,14 @@ export class BuyComponent implements OnInit {
   loading = true;
   card = { ID: 0, Nombre: '', Foto: '', Lugar: '', Dia_Hora_Inicio: '', startdate: '', enddate: '', description: '' };
   listaPuestos: any[] = [];
+  total = 0;
 
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly apiService = inject(ApiService);
 
   ngOnInit() {
+    this.clearLocalStorage();
     this.ID = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.items = [
@@ -104,15 +106,26 @@ export class BuyComponent implements OnInit {
       });
     }, 2000);
 
-    localStorage.removeItem('listaPuestos');
+    this.clearLocalStorage();
     this.goToPage(Step.Step4);
   }
 
-  goToHome = () => this.router.navigate(['/home']);  
+  goToHome = () => {
+    this.clearLocalStorage();
+    this.router.navigate(['/home']);
+  };
 
   guardarPuestos() {
     this.listaPuestos = [];
     document.querySelectorAll('select').forEach((select: HTMLSelectElement) => this.listaPuestos.push(select.value));
     localStorage.setItem('listaPuestos', JSON.stringify(this.listaPuestos));
+  }
+
+  updateTotal(total: number) {
+    this.total = total;
+  }
+
+  clearLocalStorage() {
+    localStorage.removeItem('listaPuestos');
   }
 }
