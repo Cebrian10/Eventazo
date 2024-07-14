@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
   }
 
+  updateUsuario(endpoint: string, formData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
+  }
+
   deleteUser(endpoint: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
   }
