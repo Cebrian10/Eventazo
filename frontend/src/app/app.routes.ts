@@ -24,6 +24,7 @@ import { NeweventComponent } from './views/promotor/newevent/newevent.component'
 import { PromoDashComponent } from './views/promotor/dashboard/promo-dash.component';
 
 import { authGuard, authGuard2 } from './guards/auth.guard';
+import { MessageComponent } from './views/message/message.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -36,6 +37,7 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'home', component: HomeComponent, canActivate: [authGuard] },
     { path: 'login', component: LoginComponent },
+    { path: 'message/:id', component: MessageComponent},
     { path: 'messages', component: MessagesComponent },
     { path: 'news', component: NewsComponent },
     { path: 'register', component: RegisterComponent },

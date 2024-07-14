@@ -1,6 +1,6 @@
 import { pool } from '../database/connection.js'
 
-// POST sendEmail
+// POST sendMessage
 export async function enviarMessage(req) {
     try {
         const { ID, Asunto, Detalles } = req.body;
@@ -23,14 +23,38 @@ export async function obtenerMensajes() {
     }
 }
 
-// POST getMessagesByUser
-export async function obtenerMensajesPorUsuario(req) {
+// POST getMessagesById
+export async function obtenerMensajesPorId(req) {
+    try {
+        const { id } = req.params;
+        const [result] = await pool.query('CALL ObtenerMensajesPorId(?)', [id]);
+        return result[0];
+    } catch (error) {
+        console.error('Error fetching obtenerMensajesPorId:', error);
+        throw error;
+    }
+}
+
+// POST getMessagesByIdUser
+export async function obtenerMensajesPorIdUsuario(req) {
     try {
         const { id } = req.params;
         const [result] = await pool.query('CALL ObtenerMensajesPorIdUsuario(?)', [id]);
         return result[0];
     } catch (error) {
-        console.error('Error fetching obtenerMensajes:', error);
+        console.error('Error fetching obtenerMensajesPorIdUsuario:', error);
+        throw error;
+    }
+}
+
+// POST respondMessage
+export async function responderMensaje(req) {
+    try {
+        const { Respuesta, ID_Contacto } = req.body;
+        const [result] = await pool.query('CALL ResponderMensaje(?, ?)', [Respuesta, ID_Contacto]);        
+        return result.affectedRows > 0;
+    } catch (error) {
+        console.error('Error fetching responderMensaje:', error);
         throw error;
     }
 }
