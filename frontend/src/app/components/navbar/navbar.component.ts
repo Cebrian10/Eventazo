@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
@@ -10,11 +10,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faPencilAlt, faPhone, faComments, IconDefinition, faCircleUser, faNewspaper, faCircleQuestion, faSpinner, faBullhorn, faChartSimple, faCalendarCheck, faUsers, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 import { SessionService } from '../../services/session.service';
+import { ApiService } from '../../services/api.service';
 
 import Swal from 'sweetalert2';
 
@@ -23,7 +25,7 @@ import Swal from 'sweetalert2';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [MenubarModule, AvatarModule, InputTextModule, RippleModule, CommonModule, FontAwesomeModule, MenuModule, ButtonModule]
+  imports: [FormsModule, MenubarModule, AvatarModule, InputTextModule, RippleModule, CommonModule, FontAwesomeModule, MenuModule, ButtonModule, AutoCompleteModule]
 })
 
 export class NavbarComponent implements OnInit {
@@ -43,6 +45,7 @@ export class NavbarComponent implements OnInit {
   faMessage = faMessage;
 
   private readonly sessionService = inject(SessionService);
+  private readonly apiService = inject(ApiService);
   private readonly router = inject(Router);
 
   userRol = signal<number>(0);
@@ -50,16 +53,46 @@ export class NavbarComponent implements OnInit {
   navUser = signal<MenuItem[]>([]);
   opcUser = signal<MenuItem[]>([]);
 
+  selectedEvent: any;
+  filteredEvents: any[] = [];
+
+  listaEventos: any[] = [];
+  events: any[] = [];
+
   ngOnInit() {
     this.sessionService.userRole$.subscribe(roleId => {
       this.userRol.set(roleId)
       this.updateNavbar();
+      this.updateSearchbar();
     });
 
-    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
+    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));    
+    this.userID.set(isNaN(parseInt(this.sessionService.getIdUserToken(), 10)) ? 0 : parseInt(this.sessionService.getIdUserToken(), 10));
     this.updateNavbar();
 
-    this.userID.set(isNaN(parseInt(this.sessionService.getIdUserToken(), 10)) ? 0 : parseInt(this.sessionService.getIdUserToken(), 10));
+    this.apiService.getEventos('evento').subscribe((response) => {
+      this.listaEventos = response.result; 
+      this.updateSearchbar();     
+    });
+  }
+
+  search(event: any) {
+    const query = event.query;
+    this.filteredEvents = this.events.filter(event => event && event.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  updateSearchbar() {
+    if(this.userRol() === 1){
+      this.events = this.listaEventos.map((event: any) => event.Nombre);
+    } 
+    
+    if(this.userRol() === 0 || this.userRol() === 2){
+      this.events = this.listaEventos.map((event: any) => (event.Status === 1) ? event.Nombre : null);
+    } 
+    
+    if(this.userRol() === 3){
+      this.events = this.listaEventos.map((event: any) => (event.ID_Promotor === this.userID()) ? event.Nombre : null);
+    }
   }
 
   updateNavbar() {
