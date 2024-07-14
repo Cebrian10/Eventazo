@@ -37,16 +37,6 @@ export class FaqComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
-
-    console.log(this.userRol())
     this.apiService.getFaqs('faqs').subscribe((data) => { this.tabs = data.result; });
-
-    // this.appointmentForm.patchValue({
-    //   appointmentDateTime: new Date().toISOString().substring(0, 16)
-    // });
   }
-
-  // onSubmit() {
-  //   console.log('Fecha y hora seleccionadas:', this.appointmentForm.value.appointmentDateTime);
-  // }
 }

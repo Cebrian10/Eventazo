@@ -47,7 +47,7 @@ export class MessagesComponent implements OnInit {
       .subscribe((data) => {        
         this.listaMessages = data.result;
         this.loading = false;
-        console.log(this.listaMessages);
+        // console.log(this.listaMessages);
       });
   }
 
