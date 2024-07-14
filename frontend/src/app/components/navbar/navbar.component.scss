@@ -16,7 +16,9 @@ img {
     align-items: center;
 }
 
-::ng-deep div.ng-tns-c3756965041-2 {
+::ng-deep div.p-autocomplete-panel {
+    position: absolute;
+    min-width: 268px;
     left: -16px !important;
 }
 
