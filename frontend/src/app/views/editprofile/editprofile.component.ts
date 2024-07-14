@@ -62,12 +62,12 @@ export class EditprofileComponent implements OnInit {
 
   onSubmit() {
     Swal.fire({
-      title: 'Actualizando usuario',
-      text: 'Espere un momento...',
       icon: 'info',
+      title: 'Actualizando usuario',
+      text: 'Espere un momento...',      
       showConfirmButton: false,
-      timer: 1700,
       allowOutsideClick: false,
+      allowEscapeKey: false,
       willOpen: () => {
         Swal.showLoading();
       }
