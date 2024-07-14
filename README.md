@@ -33,6 +33,8 @@ pnpm run dev
 - [Multer](https://www.npmjs.com/package/multer): Middleware de Express.js para manejar datos de formularios multipart/form-data, comúnmente utilizado para el manejo de archivos en las solicitudes HTTP. Versión utilizada: **1.4.5-lts.1**.
 - [MySQL2](https://www.npmjs.com/package/mysql2): Cliente MySQL para Node.js que proporciona una API de bajo nivel para interactuar con bases de datos MySQL/MariaDB. Versión utilizada: **3.9.7**.
 - [dotenv](https://www.npmjs.com/package/dotenv): Módulo que carga variables de entorno desde un archivo `.env` en el proceso de Node.js. Versión utilizada: **16.4.5**.
+- [body-parser](https://www.npmjs.com/package/body-parser): Middleware de Node.js para analizar cuerpos de solicitudes HTTP. Es especialmente útil para manejar datos enviados en solicitudes POST. Versión utilizada: **1.20.2**.
+- [cloudinary](https://www.npmjs.com/package/cloudinary): SDK para integrar fácilmente Cloudinary, un servicio de gestión de imágenes y vídeos en la nube, con aplicaciones Node.js. Versión utilizada: **2.2.0**.
 
 
 ## Protips:
