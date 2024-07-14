@@ -1,19 +1,7 @@
 # Eventazo
-Este proyecto es una página que se trata de...
+Eventazo es una plataforma web innovadora diseñada para la compra de boletos de eventos. Nuestro objetivo es ofrecer una experiencia de usuario excepcional que permita a los usuarios descubrir, explorar y adquirir entradas para una amplia variedad de eventos, desde conciertos y festivales hasta conferencias y eventos deportivos.
 
-## Antes de iniciar
-
-### En caso de no poder ejecutar scripts en la consola, utilizar el siguiente comando:
-```
-Set-ExecutionPolicy -Scope CurrentUser unrestricted
-```
-
-### En caso de no tener instalado pnpm, utilizar el siguiente comando:
-```
-npm install -g pnpm
-```
-
-### Para ejecutar ambos proyectos a la vez, primero instala la carpeta node_modules con:
+### Instalación de la carpeta node_modules:
 ```
 pnpm i
 ```
@@ -23,22 +11,7 @@ pnpm i
 pnpm run dev
 ```
 
-
 ## Frontend
-### Para entrar a la carpeta desde la raíz, utilizar el siguiente comando:
-```
-cd frontend
-```
-
-### Para instalar la carpeta node_modules, utilizar el siguiente comando:
-```
-pnpm i
-```
-
-### Para correr el proyecto, utilizar el siguiente comando:
-```
-pnpm start
-```
 
 ## Tecnologías utilizadas
 - [Angular](https://angular.io/): Framework de desarrollo de aplicaciones web de una sola página (SPA) mantenido por Google. Versión utilizada: **17.3.10**.
@@ -52,22 +25,7 @@ pnpm start
 - [React Router DOM](https://reactrouter.com/web/guides/quick-start): Enrutador para aplicaciones web React. Versión utilizada: **6.23.1**.
 - [SweetAlert2](https://sweetalert2.github.io/): Biblioteca para mostrar ventanas modales con estilos personalizables. Versión utilizada: **11.11.1**.
 
-
 ## Backend
-### Para entrar a la carpeta desde la raíz, utilizar el siguiente comando:
-```
-cd backend
-```
-
-### Para instalar la carpeta node_modules, utilizar el siguiente comando:
-```
-pnpm i
-```
-
-### Para correr el proyecto, utilizar el siguiente comando:
-```
-pnpm start
-```
 
 ### Tecnologías Utilizadas:
 - [Express.js](https://expressjs.com/): Framework web para Node.js, utilizado para la creación de servidores web y APIs. Versión utilizada: **4.19.2**.
@@ -77,4 +35,16 @@ pnpm start
 - [dotenv](https://www.npmjs.com/package/dotenv): Módulo que carga variables de entorno desde un archivo `.env` en el proceso de Node.js. Versión utilizada: **16.4.5**.
 
 
-###### ©Ameth Cebrian, Norman Sparks y Eric Martínez
+## Protips:
+
+### En caso de no poder ejecutar scripts en la consola, utilizar el siguiente comando:
+```
+Set-ExecutionPolicy -Scope CurrentUser unrestricted
+```
+
+### En caso de no tener instalado pnpm, utilizar el siguiente comando:
+```
+npm install -g pnpm
+```
+
+###### ©Ameth Cebrian - Norman Sparks
