@@ -1,29 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+import { AccordionModule } from 'primeng/accordion';
+
+import { ApiService } from '../../services/api.service';
+import { SessionService } from '../../services/session.service';
+
+interface Faq {
+  Titulo: string;
+  Contenido: string;
+  ID_RolUsuario: number;
+}
 
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AccordionModule, CommonModule],
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss'
 })
 export class FaqComponent implements OnInit {
+
+  private readonly apiService = inject(ApiService);
+  private readonly sessionService = inject(SessionService);
+
+  tabs: Faq[] = [];
+  userRol = signal<number>(0);
   appointmentForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,) {
     this.appointmentForm = this.fb.group({
       appointmentDateTime: ['']
     });
   }
 
   ngOnInit(): void {
-    this.appointmentForm.patchValue({
-      appointmentDateTime: new Date().toISOString().substring(0, 16)
-    });
+    this.userRol.set(isNaN(parseInt(this.sessionService.getIdRolToken(), 10)) ? 0 : parseInt(this.sessionService.getIdRolToken(), 10));
+
+    console.log(this.userRol())
+    this.apiService.getFaqs('faqs').subscribe((data) => { this.tabs = data.result; });
+
+    // this.appointmentForm.patchValue({
+    //   appointmentDateTime: new Date().toISOString().substring(0, 16)
+    // });
   }
 
-  onSubmit() {
-    console.log('Fecha y hora seleccionadas:', this.appointmentForm.value.appointmentDateTime);
-  }
+  // onSubmit() {
+  //   console.log('Fecha y hora seleccionadas:', this.appointmentForm.value.appointmentDateTime);
+  // }
 }

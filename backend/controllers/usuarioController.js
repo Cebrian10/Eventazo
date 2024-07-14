@@ -1,7 +1,7 @@
 import * as usuarioModel from '../models/usuarioModel.js';
 
 async function getAllUsuario(req, res) {
-  try {    
+  try {
     const result = await usuarioModel.obtenerTodosLosUsuarios();
     res.json({ status: 201, result: result });
 
@@ -49,9 +49,35 @@ async function getUsuarioById(req, res) {
   } catch (error) { res.json({ status: 500, message: 'Error getUsuarioById: ' + error.message }); }
 }
 
+async function deleteUsuario(req, res) {
+  try {
+    const result = await usuarioModel.eliminarUsuario(req);
+    if (result) {
+      res.json({ status: 201, result: result });
+    } else {
+      res.json({ status: 404, message: 'Error al eliminar usuario' });
+    }
+
+  } catch (error) { res.json({ status: 500, message: 'Error deleteUsuario: ' + error.message }); }
+}
+
+async function updateUsuario(req, res) {
+  try {
+    const result = await usuarioModel.actualizarUsuario(req);
+    if (result) {
+      res.json({ status: 201, result: result });
+    } else {
+      res.json({ status: 404, message: 'Error al actualizar usuario' });
+    }
+
+  } catch (error) { res.json({ status: 500, message: 'Error updateUsuario: ' + error.message }); }
+}
+
 export {
   getAllUsuario,
   createUsuario,
   getUsuario,
-  getUsuarioById
+  getUsuarioById,
+  deleteUsuario,
+  updateUsuario
 };

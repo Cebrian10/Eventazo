@@ -21,6 +21,7 @@ export class CardComponent {
   @Input() subheader: string = '';
   @Input() Foto: string = '';
   @Input() Lugar: string = '';
+  @Input() Detalles: string = '';
   @Input() Dia_Hora_Inicio: string = '';
 
   @Input() disabled: boolean = false;

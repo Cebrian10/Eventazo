@@ -4,4 +4,19 @@
   <button type="submit">Guardar</button>
 </form> -->
 
-<h1>Preguntas frecuentes</h1>
+<section>
+  <h1>Preguntas frecuentes</h1>
+
+  <p-accordion>
+    @for(tab of tabs; track tab){
+      @if(this.userRol() === tab.ID_RolUsuario){
+        <p-accordionTab [header]="tab.Titulo">
+        <p class="m-0">
+            {{ tab.Contenido }}
+        </p>
+      </p-accordionTab>  
+      }
+       
+    }    
+  </p-accordion>
+</section>

@@ -1,15 +1,18 @@
 import express from 'express';
-const router = express.Router();
-
 import * as eventoController from '../controllers/eventoController.js';
 
+const router = express.Router();
+
 router.route('/')
-    .get(eventoController.getEvents)
+  .get(eventoController.getEvents);
 
 router.route('/:id')
-    .post(eventoController.getEvent)
+  .get(eventoController.getEvent);
 
 router.route('/status')
-    .put(eventoController.updateStatus)
+  .put(eventoController.updateStatus);
+
+router.route('/eventos')
+  .post(eventoController.createEvento);
 
 export default router;
