@@ -37,6 +37,7 @@ export class BuyComponent implements OnInit {
   listaPuestos: any[] = [];
   total = 0;
   boletosSeleccionados: any[] = [];
+  transactionId: string = '';
 
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -82,6 +83,11 @@ export class BuyComponent implements OnInit {
     this.currentStep = step;
   }
 
+  handlePaymentApproved(transactionId: string) {
+    this.transactionId = transactionId;
+    this.payEvent();
+  }
+
   payEvent() {
     console.log('Procesando pago...');
 
@@ -101,11 +107,13 @@ export class BuyComponent implements OnInit {
         text: 'Se ha realizado el pago exitosamente',
         icon: 'success',
         confirmButtonText: 'Aceptar'
+      }).then(() => {
+        // Navegar al paso 4
+        this.goToPage(Step.Step4);
       });
     }, 2000);
 
     this.clearLocalStorage();
-    this.goToPage(Step.Step4);
   }
 
   ErrorPayment() {

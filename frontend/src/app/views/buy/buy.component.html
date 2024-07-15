@@ -7,16 +7,31 @@
         <app-step1></app-step1>
       </ng-container>
       <ng-container *ngIf="currentStep === Step.Step2">
-        <app-step2 (totalChange)="updateTotal($event)" (boletosSeleccionadosChange)="updateBoletosSeleccionados($event)"></app-step2>
+        <app-step2 
+        (totalChange)="updateTotal($event)" 
+        (boletosSeleccionadosChange)="updateBoletosSeleccionados($event)">
+      </app-step2>
       </ng-container>
       <ng-container *ngIf="currentStep === Step.Step3">
-        <app-step3 [totalAmount]="total" [eventoId]="ID" [boletos]="boletosSeleccionados" (paymentApproved)="payEvent()" (paymentError)="ErrorPayment()" (paymentCancel)="CancelPayment()"></app-step3>
+        <app-step3 
+        [totalAmount]="total" 
+        [eventoId]="ID" 
+        [boletos]="boletosSeleccionados" 
+        (paymentApproved)="handlePaymentApproved($event)" 
+        (paymentError)="ErrorPayment()" 
+        (paymentCancel)="CancelPayment()">
+      </app-step3>
       </ng-container>
       <ng-container *ngIf="currentStep === Step.Step4">
-        <app-step4></app-step4>
+        <app-step4
+          [transactionId]="transactionId"
+          [eventName]="card.Nombre"
+          [eventDate]="card.Dia_Hora_Inicio"
+          [eventPlace]="card.Lugar"
+          [tickets]="boletosSeleccionados">
+        </app-step4>
       </ng-container>
     </section>
-    
 
     <ng-container *ngIf="currentStep === Step.Step1">
       <div class="navigation-buttons">
@@ -32,7 +47,7 @@
     <ng-container *ngIf="currentStep === Step.Step3">
       <div class="navigation-buttons-otros">
         <button type="button" (click)="goToPage(Step.Step2)" class="btn-morado text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Volver</button>
-        <!--<button type="button" (click)="payEvent()" class="btn-azul text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pagar</button>-->
+        <button type="button" (click)="payEvent()" class="btn-azul text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pagar</button>
       </div>
     </ng-container>
     <ng-container *ngIf="currentStep === Step.Step4">
