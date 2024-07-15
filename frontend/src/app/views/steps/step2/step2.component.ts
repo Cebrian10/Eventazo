@@ -1,9 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 import { ApiService } from '../../../services/api.service';
-
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
@@ -14,8 +12,8 @@ import { SkeletonModule } from 'primeng/skeleton';
   styleUrls: ['./step2.component.scss']
 })
 export class Step2Component implements OnInit {
-
   @Output() totalChange = new EventEmitter<number>();
+  @Output() boletosSeleccionadosChange = new EventEmitter<any[]>(); // Emitir los boletos seleccionados
 
   ID: string | null | undefined;
   listaBoletos: any[] = [];
@@ -52,8 +50,7 @@ export class Step2Component implements OnInit {
 
             this.listaPuestos.forEach((puesto: number) => {
               const boletosFiltradosPorPuesto = this.listaBoletos.filter(boleto => {
-                // Ajusta la condición según las propiedades reales de tus datos
-                switch(puesto) {
+                switch (puesto) {
                   case 1: return boleto.Seccion === 'Platino';
                   case 2: return boleto.Seccion === 'Gold';
                   case 3: return boleto.Seccion === 'Silver';
@@ -65,7 +62,7 @@ export class Step2Component implements OnInit {
             });
 
             this.calculateSubtotal();
-            console.log('Boletos filtrados:', this.boletosFiltrados);
+            this.boletosSeleccionadosChange.emit(this.boletosFiltrados); // Emitir los boletos seleccionados
             this.loading = false;
           } else {
             console.error('Invalid response structure', response);
