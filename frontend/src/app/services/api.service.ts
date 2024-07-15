@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private readonly apiUrl = 'http://localhost:4000/api';
+  private readonly apiUrl = 'http://localhost:4000/api';  
   private readonly http = inject(HttpClient);
 
   get(endpoint: string): Observable<any> {

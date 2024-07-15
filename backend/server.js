@@ -26,10 +26,11 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 app.use((req, res, next) => {
   res.cookie('cookieName', 'cookieValue', {
-      sameSite: 'None',
-      secure: true
+    sameSite: 'None',
+    secure: true
   });
   next();
 });
@@ -41,14 +42,6 @@ app.use('/api/boleto', boletoRoutes);
 app.use('/api/contacto', contactoRoutes);
 app.use('/api/faqs', faqRoutes);
 app.use('/api/transaccion', transaccionRoutes);
-
-app.use((req, res, next) => {
-  res.cookie('cookieName', 'cookieValue', {
-      sameSite: 'None',
-      secure: true
-  });
-  next();
-});
 
 
 app.listen(PORT, () => {

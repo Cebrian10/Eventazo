@@ -11,6 +11,7 @@ import { ContactComponent } from './views/contact/contact.component';
 // Regular routes
 import { HistoryComponent } from './views/history/history.component';
 import { BuyComponent } from './views/buy/buy.component';
+import { BoletoComponent } from './views/boleto/boleto.component';
 import { Step1Component } from './views/steps/step1/step1.component';
 import { Step2Component } from './views/steps/step2/step2.component';
 import { Step3Component } from './views/steps/step3/step3.component';
@@ -49,6 +50,7 @@ export const routes: Routes = [
     // Regular Rutas
     { path: 'buy/:id', component: BuyComponent },
     { path: 'history/:id', component: HistoryComponent },
+    { path: 'boleto', component: BoletoComponent },
     { path: 'step1', component: Step1Component },
     { path: 'step2', component: Step2Component },
     { path: 'step3', component: Step3Component },
