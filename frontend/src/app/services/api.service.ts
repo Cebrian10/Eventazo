@@ -93,7 +93,6 @@ export class ApiService {
   }
 
   postMessagePorIdUser(endpoint: string): Observable<any> {
-    console.log(`${this.apiUrl}/${endpoint}`) ;
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
   }
 }

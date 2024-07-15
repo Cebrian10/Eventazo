@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -20,7 +21,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, InputTextModule, DropdownModule, FloatLabelModule, PasswordModule, ButtonModule, FontAwesomeModule],
+  imports: [FormsModule, CommonModule, InputTextModule, DropdownModule, FloatLabelModule, PasswordModule, ButtonModule, FontAwesomeModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -40,10 +41,37 @@ export class RegisterComponent {
   password: string = "";
   id_rol: number = 0;
 
-  passwordVisible: boolean = false;
+  passwordVisible: boolean = false;  
 
   async onSubmit() {
     if (this.name != "" && this.lastname != "" && this.email != "" && this.password != "" && this.id_rol != 0) {
+
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+      if (!emailPattern.test(this.email)) {
+        Swal.fire({
+          position: 'center',
+          icon: "info",
+          title: "Correo inválido",
+          text: "El correo debe tener un formato válido...",
+          showConfirmButton: false,
+          timer: 2000,
+          allowOutsideClick: false,
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Registrando usuario...',
+        text: 'Espere un momento...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        allowEscapeKey: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
 
       const formData = {
         Nombre: this.name,
@@ -53,22 +81,45 @@ export class RegisterComponent {
         ID_RolUsuario: this.id_rol
       };
 
-      this.apiService.postUsuario('usuario2', formData)
+      this.apiService.postUsuario('usuario', formData)
         .pipe(
           tap(response => {
 
             switch (response.status) {
               case 201:
-                console.log('Registro exitoso:', response);
-                this.router.navigate(['/login']);
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Registro exitoso",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              
+                setTimeout(() => {
+                  this.router.navigate(['/login']);
+                }, 1500);              
                 break;
 
               case 404:
-                console.log('Registro fallido:', response);
+                Swal.fire({
+                  position: 'center',
+                  icon: "info",
+                  title: "No se encontró la ruta...",
+                  showConfirmButton: false,
+                  timer: 1700,
+                  allowOutsideClick: false,
+                });
                 break;
 
               case 409:
-                console.log('El correo ya está registrado:', response);
+                Swal.fire({
+                  position: 'center',
+                  icon: "info",
+                  title: "El correo ya está registrado...",
+                  showConfirmButton: false,
+                  timer: 1700,
+                  allowOutsideClick: false,
+                });
                 break;
 
               case 500:

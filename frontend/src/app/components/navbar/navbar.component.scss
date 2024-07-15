@@ -16,6 +16,12 @@ img {
     align-items: center;
 }
 
+::ng-deep div.p-autocomplete-panel {
+    position: absolute;
+    min-width: 268px;
+    left: -16px !important;
+}
+
 @media (max-width: 768px) {
     .ng-start {        
         position: absolute;

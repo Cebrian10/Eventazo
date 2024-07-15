@@ -1,13 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+
 import usuarioRoutes from './routes/usuarioRoutes.js';
 import eventoRoutes from './routes/eventoRoutes.js';
 import boletoRoutes from './routes/boletoRoutes.js';
 import contactoRoutes from './routes/contactoRoutes.js';
 import faqRoutes from './routes/faqRoutes.js';
 import transaccionRoutes from './routes/transaccionRoutes.js';
-import bodyParser from 'body-parser';
 
 dotenv.config();
 
