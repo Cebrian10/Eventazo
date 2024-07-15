@@ -73,4 +73,15 @@ export class ApiService {
   getBoletoPorIdEvento(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
+
+  registrarTransaccion(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/transaccion`, data);
+  }
+  obtenerTransacciones(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/transaccion`);
+  }
+ obtenerTransaccionPorId(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/transaccion/${id}`);
+  }
+
 }

@@ -1,19 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 import { MenuItem } from 'primeng/api';
 import { StepsModule } from 'primeng/steps';
-
 import { ApiService } from '../../services/api.service';
-
 import { CardComponent } from '../../components/card/card.component';
 import { Step1Component } from '../steps/step1/step1.component';
 import { Step2Component } from '../steps/step2/step2.component';
 import { Step3Component } from '../steps/step3/step3.component';
 import { Step4Component } from '../steps/step4/step4.component';
 import { SkeletonModule } from 'primeng/skeleton';
-
 import Swal from 'sweetalert2';
 
 enum Step {
@@ -32,7 +28,7 @@ enum Step {
 })
 export class BuyComponent implements OnInit {
   Step = Step;
-  ID: string | null | undefined;
+  ID: string | null = null;
   items: MenuItem[] = [];
   currentStep: Step = Step.Step1;
   activeIndex: number = 0;
@@ -40,6 +36,7 @@ export class BuyComponent implements OnInit {
   card = { ID: 0, Nombre: '', Foto: '', Lugar: '', Dia_Hora_Inicio: '', startdate: '', enddate: '', description: '' };
   listaPuestos: any[] = [];
   total = 0;
+  boletosSeleccionados: any[] = [];
 
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -47,7 +44,8 @@ export class BuyComponent implements OnInit {
 
   ngOnInit() {
     this.clearLocalStorage();
-    this.ID = this.activatedRoute.snapshot.paramMap.get('id');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.ID = id ? id : null;
 
     this.items = [
       { label: 'Boletos', command: () => this.goToPage(Step.Step1) },
@@ -110,6 +108,36 @@ export class BuyComponent implements OnInit {
     this.goToPage(Step.Step4);
   }
 
+  ErrorPayment() {
+    Swal.fire({
+      title: 'Error en el pago',
+      text: 'Ha ocurrido un error en el pago, por favor intente de nuevo',
+      icon: 'error',
+      confirmButtonText: 'Aceptar',
+      showConfirmButton: false,
+      willOpen: () => {
+        setTimeout(() => {
+          Swal.close();
+        }, 2000);
+      } 
+    });
+  }
+
+  CancelPayment() {
+    Swal.fire({
+      title: 'Pago cancelado',
+      text: 'El pago ha sido cancelado',
+      icon: 'info',
+      confirmButtonText: 'Aceptar',
+      showConfirmButton: false,
+      willOpen: () => {
+        setTimeout(() => {
+          Swal.close();
+        }, 2000);
+      }
+    });
+  }
+
   goToHome = () => {
     this.clearLocalStorage();
     this.router.navigate(['/home']);
@@ -123,6 +151,11 @@ export class BuyComponent implements OnInit {
 
   updateTotal(total: number) {
     this.total = total;
+  }
+
+  updateBoletosSeleccionados(boletos: any[]) {
+    this.boletosSeleccionados = boletos;
+    console.log('Boletos seleccionados actualizados:', this.boletosSeleccionados); // Añadido para depuración
   }
 
   clearLocalStorage() {
