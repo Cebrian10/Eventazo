@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
 
@@ -18,6 +19,7 @@ import { faEye, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 export class MessagesComponent implements OnInit {
 
   private readonly apiService = inject(ApiService);
+  private readonly router = inject(Router);
   private readonly sessionService = inject(SessionService);
 
   userID = signal<number>(0);
@@ -38,8 +40,8 @@ export class MessagesComponent implements OnInit {
     this.userID.set(isNaN(idUserToken) ? 0 : idUserToken);
     this.userRol.set(isNaN(idRolToken) ? 0 : idRolToken);
 
-    const endpoint = this.userRol() === 1 ? 'contacto/all' : 'contacto/' + this.userID();
-    const method = this.userRol() === 1 ? this.apiService.getMessages : this.apiService.postMessagePorId;
+    const endpoint = this.userRol() === 1 ? 'contacto/all' : `contacto/user/${this.userID()}`;
+    const method = this.userRol() === 1 ? this.apiService.getMessages : this.apiService.postMessagePorIdUser;
 
     method.call(this.apiService, endpoint)
       .subscribe((data) => {        
@@ -49,7 +51,5 @@ export class MessagesComponent implements OnInit {
       });
   }
 
-  statusMessage (id: number) {
-    console.log(id)
-  };
+  statusMessage = (id: number) => this.router.navigate(['/message', id]);
 }

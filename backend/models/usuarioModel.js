@@ -58,3 +58,14 @@ export async function eliminarUsuario(req) {
     throw error;
   }
 }
+
+export async function actualizarUsuario(req) {
+  try {    
+    const { ID, Nombre, Apellido, Correo, ID_RolUsuario } = req.body;
+    const [result] = await pool.query('CALL ActualizarUsuario(?, ?, ?, ?, ?)', [ID, Nombre, Apellido, Correo, ID_RolUsuario]);
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error('Error fetching actualizarUsuario:', error);
+    throw error;
+  }
+}

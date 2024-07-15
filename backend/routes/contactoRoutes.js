@@ -9,7 +9,13 @@ router.route('/')
 router.route('/all')
     .get(contactoController.getMessages)
 
+router.route('/response')
+    .post(contactoController.respondMessage)
+
 router.route('/:id')
-    .post(contactoController.getMessagesByUser)
+    .post(contactoController.getMessagesById)
+
+router.route('/user/:id')
+    .post(contactoController.getMessagesByIdUser)
 
 export default router;

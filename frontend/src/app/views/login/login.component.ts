@@ -44,11 +44,12 @@ export class LoginComponent {
 
   async onSubmit() {
     Swal.fire({
+      icon: 'info',
       title: 'Iniciando sesion...',
-      text: 'Por favor espera',
-      allowOutsideClick: false,
-      allowEscapeKey: false,
+      text: 'Espere un momento...',
+      allowOutsideClick: false,      
       showConfirmButton: false,
+      allowEscapeKey: false,
       willOpen: () => {
         Swal.showLoading();
       }

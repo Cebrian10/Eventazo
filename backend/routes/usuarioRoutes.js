@@ -10,6 +10,9 @@ router.route('/')
 router.route('/login')
     .post(usuarioController.getUsuario)
 
+router.route('/update')
+    .post(usuarioController.updateUsuario)
+
 router.route('/delete/:id')
     .post(usuarioController.deleteUsuario)
 

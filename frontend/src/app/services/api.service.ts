@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  
+
   private readonly apiUrl = 'http://localhost:4000/api';
   private readonly http = inject(HttpClient);
 
@@ -20,6 +20,10 @@ export class ApiService {
 
   postUsuarioPorId(endpoint: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
+  }
+
+  updateUsuario(endpoint: string, formData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
 
   deleteUser(endpoint: string): Observable<any> {
@@ -45,7 +49,7 @@ export class ApiService {
   getBoletos(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
- 
+
   putStatusEvento(endpoint: string, formData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
@@ -83,5 +87,13 @@ export class ApiService {
  obtenerTransaccionPorId(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/transaccion/${id}`);
   }
+  
+  postMessage(endpoint: string, formData: any): Observable<any> {       
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
+  }
 
+  postMessagePorIdUser(endpoint: string): Observable<any> {
+    console.log(`${this.apiUrl}/${endpoint}`) ;
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
+  }
 }

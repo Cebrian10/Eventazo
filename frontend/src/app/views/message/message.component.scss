@@ -2,18 +2,20 @@
     background-image: url('../../../assets/concierto.jpg');
     background-size: cover;
     background-position: center;
-    height: calc(100vh - 195px);
+    // height: calc(100vh - 195px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .formulario {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 1);
     max-width: 60%;
     width: 100%;
-    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem;
 }
 
 .formulario h1 {
@@ -50,80 +52,36 @@
     cursor: pointer;
 }
 
+.formulario div textarea {
+    width: 100%;
+    resize: none;
+    font-size: 1rem;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.w-full-med {
+    width: 98% !important;
+}
+
+.w-full {
+    width: 99% !important;
+}
+
 .flex div {
     width: 50%;
 }
 
 .div-button {
-    // display: flex;
-    // align-items: center;
-    // align-items: start;
-    // margin-top: 12px;
-    width: 100% !important;
-}
-
-.view-password {
     display: flex;
     align-items: center;
 }
 
-.view-password input {
-    width: 1rem !important;
-    margin: 0 10px 0 0;
-}
-
-.view-password label {
-    margin: 0;
-}
-
-.lbl-login {
-    text-align: center;
-    margin-top: 8px;
-}
-
-.lbl-login a {
-    color: #007bff;
-    cursor: pointer;
-}
-
-.relative {
-    position: relative;
-    width: 100% !important;
-}
-
-.absolute {
-    position: absolute;
-}
-
-.top-1-2 {
-    top: 50%;
-}
-
-fa-icon {
-    right: 2rem;
-}
-
-.transform {
-    transform: translateY(-50%);
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.w-full {
-    width: 100%;
-}
-
-.pr-10 {
-    padding-right: 2.5rem;
-}
-
-
 @media (max-width: 768px) {
-    .contenedor {
-        height: calc(100vh - 80px);
-    }
+    // .contenedor {
+    //     height: calc(100vh - 20px);
+    // }
 
     .formulario {
         max-width: 90%;
@@ -142,12 +100,7 @@ fa-icon {
         width: 100%;
     }
 
-    fa-icon {
-        right: 0.75rem;
-    }
-
-    .lbl-login {
-        display: flex !important;
-        flex-direction: column;
+    .w-full {
+        width: 100% !important;
     }
 }
