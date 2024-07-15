@@ -30,23 +30,23 @@ export class Step2Component implements OnInit {
 
   ngOnInit() {
     this.ID = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('ID:', this.ID);
+    // console.log('ID:', this.ID);
 
     const storedPuestos = localStorage.getItem('listaPuestos');
 
     if (storedPuestos) {
       const parsedPuestos = JSON.parse(storedPuestos) as string[];
       this.listaPuestos = parsedPuestos.map(puesto => parseInt(puesto, 10));
-      console.log('Lista de puestos:', this.listaPuestos);
+      // console.log('Lista de puestos:', this.listaPuestos);
     }
 
     if (this.ID) {
       this.apiService.getBoletoPorIdEvento('boleto/' + this.ID).subscribe(
         (response) => {
-          console.log('Response:', response);
+          // console.log('Response:', response);
           if (response && response.result) {
             this.listaBoletos = response.result;
-            console.log('Lista de boletos:', this.listaBoletos);
+            // console.log('Lista de boletos:', this.listaBoletos);
 
             this.listaPuestos.forEach((puesto: number) => {
               const boletosFiltradosPorPuesto = this.listaBoletos.filter(boleto => {

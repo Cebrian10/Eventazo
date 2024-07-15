@@ -65,7 +65,7 @@ export class Step3Component implements AfterViewInit {
         },
         onApprove: (data: any, actions: any) => {
           return actions.order.capture().then((details: any) => {
-            console.log(details);
+            // console.log(details);
             if (details.status === 'COMPLETED') {
               const payerName = details.payer.name.given_name + ' ' + details.payer.name.surname;
               const payerEmail = details.payer.email_address;
@@ -112,11 +112,11 @@ export class Step3Component implements AfterViewInit {
       general: boletosAgrupados['General'] || 0
     };
 
-    console.log('Sending transaction data:', transactionData);
+    // console.log('Sending transaction data:', transactionData);
 
     this.apiService.registrarTransaccion(transactionData).subscribe(
       response => {
-        console.log('Transaction registered:', response);
+        // console.log('Transaction registered:', response);
       },
       error => {
         console.error('Failed to register transaction:', error);

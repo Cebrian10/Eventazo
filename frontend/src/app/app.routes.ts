@@ -35,7 +35,7 @@ export const routes: Routes = [
     
     // Principal Rutas
     { path: '', component: HomeComponent, canActivate: [authGuard] },
-    { path: '**', redirectTo: '', pathMatch: 'full' },
+    
     
 
     // General Rutas
@@ -65,5 +65,7 @@ export const routes: Routes = [
     { path: 'promotor', component: PromotorComponent },
     { path: 'promotor/newevent', component: NeweventComponent },
     { path: 'promotor/newevent/:step', component: NeweventComponent },
-    { path: 'promotor/dashboard', component: PromoDashComponent }
+    { path: 'promotor/dashboard', component: PromoDashComponent },
+
+    { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

@@ -44,7 +44,8 @@ export class UsersComponent implements OnInit {
         this.apiService.deleteUser('usuario/delete/'+ id).subscribe(() => {
           this.listaUsuarios = this.listaUsuarios.filter(usuario => usuario.id !== id);
         });
-        Swal.fire('Eliminado', 'El usuario ha sido eliminado', 'success');
+        Swal.fire('Eliminado', 'El usuario ha sido eliminado', 'success')
+        .then(() => window.location.reload());        
       }
     });
   }
