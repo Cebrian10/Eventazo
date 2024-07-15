@@ -14,7 +14,7 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 
-  postUsuario(endpoint: string, formData: any): Observable<any> {
+  postUsuario(endpoint: string, formData: any): Observable<any> {    
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
 

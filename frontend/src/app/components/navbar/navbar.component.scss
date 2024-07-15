@@ -16,14 +16,16 @@ img {
     align-items: center;
 }
 
-::ng-deep div.p-autocomplete-panel {
-    position: absolute;
-    min-width: 268px;
+::ng-deep div.ng-tns-c3756965041-2 {
     left: -16px !important;
 }
 
+::ng-deep input.p-element {
+    background-color: #F9FAFB;
+}
+
 @media (max-width: 768px) {
-    .ng-start {        
+    .ng-start {
         position: absolute;
         display: flex;
         justify-content: center;
