@@ -48,7 +48,7 @@ export const routes: Routes = [
     
     // Regular Rutas
     { path: 'buy/:id', component: BuyComponent },
-    { path: 'history', component: HistoryComponent },
+    { path: 'history/:id', component: HistoryComponent },
     { path: 'step1', component: Step1Component },
     { path: 'step2', component: Step2Component },
     { path: 'step3', component: Step3Component },

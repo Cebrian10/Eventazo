@@ -10,11 +10,19 @@ export class ApiService {
   private readonly apiUrl = 'http://localhost:4000/api';
   private readonly http = inject(HttpClient);
 
+  get(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
+  }
+
+  post(endpoint: string, formData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
+  }
+
   getUsers(endpoint: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 
-  postUsuario(endpoint: string, formData: any): Observable<any> {    
+  postUsuario(endpoint: string, formData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
 
@@ -51,7 +59,7 @@ export class ApiService {
   }
 
   putStatusEvento(endpoint: string, formData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${endpoint}`, formData);
+    return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
 
   postContact(endpoint: string, formData: any): Observable<any> {
@@ -81,18 +89,24 @@ export class ApiService {
   registrarTransaccion(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/transaccion`, data);
   }
+
   obtenerTransacciones(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/transaccion`);
   }
- obtenerTransaccionPorId(id: string): Observable<any> {
+
+  obtenerTransaccionPorId(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/transaccion/${id}`);
   }
-  
-  postMessage(endpoint: string, formData: any): Observable<any> {       
+
+  postMessage(endpoint: string, formData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, formData);
   }
 
   postMessagePorIdUser(endpoint: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${endpoint}`, {});
+  }
+
+  getHistorialPorUsuario(endpoint: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`);
   }
 }

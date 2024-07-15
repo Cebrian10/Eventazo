@@ -139,8 +139,8 @@ export class NavbarComponent implements OnInit {
 
         this.opcUser.set([
           // { label: 'Cupones', command: () => this.goToPage('cupons') }, //OPCIONAL
-          { label: 'Historial de compras', command: () => this.goToPage('history') },
-          { separator: true },
+          { label: 'Historial de compras', command: () => this.goToPage('history/' + this.userID()) },
+          { separator: true },          
           { label: 'Editar perfil', command: () => this.goToPage('editprofile/' + this.userID()) },
           { label: 'Cerrar sesión', command: () => this.logout() }
         ]);
